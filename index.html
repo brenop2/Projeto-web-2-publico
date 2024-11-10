@@ -21,7 +21,7 @@
     </style>
   </head>
   <body class="flex min-h-screen flex-col">
-    <header class="flex h-14 items-center bg-white px-4 shadow-md lg:px-6">
+    <header class="flex h-20 items-center bg-white px-4 shadow-md lg:px-6">
       <div class="container mx-auto flex items-center justify-between">
         <a href="#" class="flex items-center justify-center">
           <i class="fas fa-graduation-cap mr-2 text-2xl text-teal-700"></i>
@@ -77,7 +77,7 @@
           <li><a href="#" class="hover:text-gray-300">Recursos</a></li>
           <li><a href="#" class="hover:text-gray-300">Preços</a></li>
           <li><a href="#" class="hover:text-gray-300">Sobre</a></li>
-          <li><a href="./login" class="hover:text-gray-300">Login</a></li>
+          <li><a href="./login.html" class="hover:text-gray-300">Login</a></li>
         </ul>
       </nav>
     </div>
@@ -305,46 +305,8 @@
       </nav>
     </footer>
 
+    <script src="./menu.js"></script>
     <script>
-      const mobileMenuButton = document.getElementById('mobile-menu-button');
-      const closeMenuButton = document.getElementById('close-menu-button');
-      const mobileMenu = document.getElementById('mobile-menu');
-
-      function toggleMenu() {
-        mobileMenu.classList.toggle('hidden');
-        document.body.classList.toggle('overflow-hidden');
-      }
-
-      mobileMenuButton.addEventListener('click', toggleMenu);
-      closeMenuButton.addEventListener('click', toggleMenu);
-
-      // Close menu when clicking outside
-      mobileMenu.addEventListener('click', function (event) {
-        if (event.target === this) {
-          toggleMenu();
-        }
-      });
-
-      // Close menu when pressing Escape key
-      document.addEventListener('keydown', function (event) {
-        if (
-          event.key === 'Escape' &&
-          !mobileMenu.classList.contains('hidden')
-        ) {
-          toggleMenu();
-        }
-      });
-
-      // Handle window resize
-      window.addEventListener('resize', function () {
-        if (
-          window.innerWidth >= 768 &&
-          !mobileMenu.classList.contains('hidden')
-        ) {
-          toggleMenu();
-        }
-      });
-
       document
         .getElementById('email-form')
         .addEventListener('submit', function (e) {
