@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EduQuiz - Aprenda Mais Rápido, Lembre-se por Mais Tempo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+      body {
+        font-family: 'Inter', sans-serif;
+      }
+    </style>
+  </head>
+  <body class="flex min-h-screen flex-col">
+    <header class="flex h-14 items-center bg-white px-4 shadow-md lg:px-6">
+      <div class="container mx-auto flex items-center justify-between">
+        <a href="#" class="flex items-center justify-center">
+          <i class="fas fa-graduation-cap mr-2 text-2xl text-teal-700"></i>
+          <span class="text-2xl font-bold text-teal-700">EduQuiz</span>
+        </a>
+        <nav class="hidden gap-4 sm:gap-6 md:flex">
+          <a
+            class="text-sm font-medium text-gray-700 underline-offset-4 hover:underline"
+            href="#"
+            >Recursos</a
+          >
+          <a
+            class="text-sm font-medium text-gray-700 underline-offset-4 hover:underline"
+            href="#"
+            >Preços</a
+          >
+          <a
+            class="text-sm font-medium text-gray-700 underline-offset-4 hover:underline"
+            href="#"
+            >Sobre</a
+          >
+          <a
+            class="text-sm font-medium text-gray-700 underline-offset-4 hover:underline"
+            href="./login.html"
+            >Login
+          </a>
+        </nav>
+        <button
+          id="mobile-menu-button"
+          class="md:hidden"
+          aria-label="Abrir menu móvel"
+        >
+          <i class="fas fa-bars text-gray-700"></i>
+        </button>
+      </div>
+    </header>
+
+    <div
+      id="mobile-menu"
+      class="fixed inset-0 z-50 hidden bg-gray-800 bg-opacity-75"
+    >
+      <div class="flex justify-end p-4">
+        <button
+          id="close-menu-button"
+          class="text-white"
+          aria-label="Fechar menu móvel"
+        >
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <nav>
+        <ul class="flex flex-col items-center gap-4 text-lg text-white">
+          <li><a href="#" class="hover:text-gray-300">Recursos</a></li>
+          <li><a href="#" class="hover:text-gray-300">Preços</a></li>
+          <li><a href="#" class="hover:text-gray-300">Sobre</a></li>
+          <li><a href="./login" class="hover:text-gray-300">Login</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <main class="flex-1">
+      <section class="w-full py-12 md:py-24 lg:py-32 xl:py-48">
+        <div class="container mx-auto max-w-7xl px-4 md:px-6">
+          <div
+            class="flex flex-wrap items-center justify-center gap-6 md:gap-12"
+          >
+            <div
+              class="flex flex-col flex-wrap justify-center gap-4 text-center lg:text-left"
+            >
+              <div class="max-w-xl space-y-4">
+                <h1
+                  class="text-3xl font-bold tracking-tighter text-gray-900 sm:text-4xl md:text-5xl lg:text-6xl/none"
+                >
+                  Aprenda Mais Rápido, Lembre-se por Mais Tempo
+                </h1>
+                <p class="text-gray-700 md:text-xl">
+                  EduQuiz transforma o aprendizado em um jogo viciante. Crie,
+                  compartilhe e domine questionários sobre qualquer assunto.
+                </p>
+              </div>
+
+              <div class="w-full space-y-2">
+                <form id="email-form" class="flex gap-2">
+                  <input
+                    class="max-w-lg flex-1 rounded-md border px-3 py-2 text-sm text-gray-900"
+                    placeholder="Digite seu email"
+                    type="email"
+                    required
+                  />
+                  <button
+                    type="submit"
+                    class="rounded-md bg-teal-700 px-3 py-2 text-sm font-medium text-white hover:bg-teal-800 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
+                  >
+                    Começar
+                  </button>
+                </form>
+                <p class="text-left text-xs text-gray-600">
+                  Inicie seu teste gratuito. Não é necessário cartão de crédito.
+                </p>
+              </div>
+            </div>
+
+            <img
+              src="./assets/hero.png"
+              alt="EduQuiz em ação"
+              class="aspect-[4/3] rounded-xl object-cover object-center"
+              width="600"
+              height="400"
+            />
+          </div>
+        </div>
+      </section>
+      <section class="w-full bg-gray-100 py-12 md:py-24 lg:py-32">
+        <div class="container mx-auto max-w-5xl px-4 md:px-6">
+          <h2
+            class="mb-12 text-center text-3xl font-bold tracking-tighter text-gray-900 sm:text-5xl"
+          >
+            Por que EduQuiz?
+          </h2>
+          <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            <div class="rounded-lg bg-white p-6 shadow-lg">
+              <div class="flex flex-col items-center gap-2 text-center">
+                <i class="fas fa-bolt text-4xl text-teal-700"></i>
+                <h3 class="text-xl font-bold text-gray-900">
+                  Aprendizado Rápido
+                </h3>
+                <p class="text-center text-sm text-gray-700">
+                  Participe de questionários rápidos e curtos que tornam o
+                  aprendizado viciante.
+                </p>
+              </div>
+            </div>
+            <div class="rounded-lg bg-white p-6 shadow-lg">
+              <div class="flex flex-col items-center gap-2 text-center">
+                <i class="fas fa-users text-4xl text-teal-700"></i>
+                <h3 class="text-xl font-bold text-gray-900">
+                  Aprendizado Social
+                </h3>
+                <p class="text-center text-sm text-gray-700">
+                  Compita com amigos e aprenda juntos em um ambiente divertido e
+                  social.
+                </p>
+              </div>
+            </div>
+            <div class="rounded-lg bg-white p-6 shadow-lg">
+              <div class="flex flex-col items-center gap-2 text-center">
+                <i class="fas fa-brain text-4xl text-teal-700"></i>
+                <h3 class="text-xl font-bold text-gray-900">
+                  Aprendizado Adaptativo
+                </h3>
+                <p class="text-center text-sm text-gray-700">
+                  Nossa IA ajusta a dificuldade dos questionários com base no
+                  seu desempenho para um aprendizado ideal.
+                </p>
+              </div>
+            </div>
+            <div class="rounded-lg bg-white p-6 shadow-lg">
+              <div class="flex flex-col items-center gap-2 text-center">
+                <i class="fas fa-trophy text-4xl text-teal-700"></i>
+                <h3 class="text-xl font-bold text-gray-900">
+                  Progresso Gamificado
+                </h3>
+                <p class="text-center text-sm text-gray-700">
+                  Ganhe pontos, emblemas e suba nos rankings enquanto aprende.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="w-full py-12 md:py-24 lg:py-32">
+        <div class="container mx-auto px-4 md:px-6">
+          <h2
+            class="mb-12 text-center text-3xl font-bold tracking-tighter text-gray-900 sm:text-5xl"
+          >
+            O que Nossos Usuários Dizem
+          </h2>
+          <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <div class="rounded-lg bg-white p-6 shadow-lg">
+              <div class="flex flex-col gap-4">
+                <div class="flex items-center gap-4">
+                  <img
+                    src="./assets/breno.png"
+                    alt="Avatar de Breno"
+                    class="h-12 w-12 rounded-full"
+                  />
+                  <div>
+                    <p class="text-sm font-semibold text-gray-900">Breno</p>
+                    <p class="text-xs text-gray-600">Estudante</p>
+                  </div>
+                </div>
+                <p class="text-sm text-gray-700">
+                  "O EduQuiz tornou o estudo para minhas provas divertido e
+                  eficaz. Nunca retive informações tão bem!"
+                </p>
+              </div>
+            </div>
+            <div class="rounded-lg bg-white p-6 shadow-lg">
+              <div class="flex flex-col gap-4">
+                <div class="flex items-center gap-4">
+                  <img
+                    src="./assets/matheus.png"
+                    alt="Avatar de Matheus"
+                    class="h-12 w-12 rounded-full"
+                  />
+                  <div>
+                    <p class="text-sm font-semibold text-gray-900">Matheus</p>
+                    <p class="text-xs text-gray-600">Educador</p>
+                  </div>
+                </div>
+                <p class="text-sm text-gray-700">
+                  "Como professor, o EduQuiz revolucionou a forma como eu
+                  envolvo meus alunos. Eles realmente esperam ansiosamente pelos
+                  questionários agora!"
+                </p>
+              </div>
+            </div>
+            <div class="rounded-lg bg-white p-6 shadow-lg">
+              <div class="flex flex-col gap-4">
+                <div class="flex items-center gap-4">
+                  <img
+                    src="./assets/marcos.png"
+                    alt="Avatar de Marcos"
+                    class="h-12 w-12 rounded-full"
+                  />
+                  <div>
+                    <p class="text-sm font-semibold text-gray-900">Marcos</p>
+                    <p class="text-xs text-gray-600">Profissional</p>
+                  </div>
+                </div>
+                <p class="text-sm text-gray-700">
+                  "Eu uso o EduQuiz para manter minha mente afiada. É como uma
+                  academia para o seu cérebro!"
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="w-full bg-teal-700 py-12 text-white md:py-24 lg:py-32">
+        <div class="container mx-auto px-4 md:px-6">
+          <div class="flex flex-col items-center gap-4 text-center">
+            <div class="space-y-2">
+              <h2 class="text-3xl font-bold tracking-tighter sm:text-5xl">
+                Pronto para Dominar Qualquer Assunto?
+              </h2>
+              <p class="mx-auto max-w-[600px] text-teal-100 md:text-xl">
+                Junte-se a milhares de aprendizes que já estão fazendo
+                questionários rumo ao sucesso.
+              </p>
+            </div>
+            <a
+              href="./login.html"
+              class="focus-visible:ring-ring ring-offset-background inline-flex h-11 items-center justify-center rounded-md bg-white px-8 text-sm font-medium text-teal-700 transition-colors hover:bg-teal-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
+            >
+              Comece Seu Teste Gratuito
+              <i class="fas fa-chevron-right ml-2"></i>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer
+      class="mx-auto flex w-full max-w-7xl shrink-0 flex-col items-center gap-2 border-t px-4 py-6 sm:flex-row md:px-6"
+    >
+      <p class="text-xs text-gray-700">
+        © 2024 EduQuiz Inc. Todos os direitos reservados.
+      </p>
+      <nav class="flex gap-4 sm:ml-auto sm:gap-6">
+        <a
+          class="text-xs text-gray-700 underline-offset-4 hover:underline"
+          href="#"
+          >Termos de Serviço</a
+        >
+        <a
+          class="text-xs text-gray-700 underline-offset-4 hover:underline"
+          href="#"
+          >Privacidade</a
+        >
+      </nav>
+    </footer>
+
+    <script>
+      const mobileMenuButton = document.getElementById('mobile-menu-button');
+      const closeMenuButton = document.getElementById('close-menu-button');
+      const mobileMenu = document.getElementById('mobile-menu');
+
+      function toggleMenu() {
+        mobileMenu.classList.toggle('hidden');
+        document.body.classList.toggle('overflow-hidden');
+      }
+
+      mobileMenuButton.addEventListener('click', toggleMenu);
+      closeMenuButton.addEventListener('click', toggleMenu);
+
+      // Close menu when clicking outside
+      mobileMenu.addEventListener('click', function (event) {
+        if (event.target === this) {
+          toggleMenu();
+        }
+      });
+
+      // Close menu when pressing Escape key
+      document.addEventListener('keydown', function (event) {
+        if (
+          event.key === 'Escape' &&
+          !mobileMenu.classList.contains('hidden')
+        ) {
+          toggleMenu();
+        }
+      });
+
+      // Handle window resize
+      window.addEventListener('resize', function () {
+        if (
+          window.innerWidth >= 768 &&
+          !mobileMenu.classList.contains('hidden')
+        ) {
+          toggleMenu();
+        }
+      });
+
+      document
+        .getElementById('email-form')
+        .addEventListener('submit', function (e) {
+          e.preventDefault();
+          window.location.href = 'login.html';
+        });
+    </script>
+  </body>
+</html>
