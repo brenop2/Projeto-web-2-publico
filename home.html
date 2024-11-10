@@ -3,17 +3,112 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./home.css" />
     <title>Home EduQuiz</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
       body {
         font-family: 'Inter', sans-serif;
       }
     </style>
+    <link rel="stylesheet" href="./home.css" />
   </head>
-  <body>
-    <main class="home">
+  <body class="flex h-full min-h-screen flex-col">
+    <header class="flex h-20 items-center bg-white px-4 shadow-md lg:px-6">
+      <div class="container mx-auto flex items-center justify-between">
+        <a href="./home.html" class="flex items-center justify-center">
+          <i class="fas fa-graduation-cap mr-2 text-2xl text-teal-700"></i>
+          <span class="text-2xl font-bold text-teal-700">EduQuiz</span>
+        </a>
+        <nav class="hidden items-center gap-4 sm:gap-6 md:flex">
+          <a
+            class="text-sm font-medium text-gray-700 underline-offset-4 hover:underline"
+            href="./home.html"
+            >Home</a
+          >
+          <a
+            class="text-sm font-medium text-gray-700 underline-offset-4 hover:underline"
+            href="#"
+            >Progresso</a
+          >
+          <a
+            class="text-sm font-medium text-gray-700 underline-offset-4 hover:underline"
+            href="#"
+            >Configurações</a
+          >
+          <div class="relative">
+            <button
+              id="user-menu-button"
+              class="flex items-center gap-2 text-sm font-medium text-gray-700 hover:text-gray-800"
+            >
+              <span>Joana da Silva</span>
+              <img
+                class="h-8 w-8 rounded-full"
+                src="./assets/breno.png"
+                alt="User avatar"
+              />
+            </button>
+            <!-- Dropdown menu, show/hide based on menu state -->
+            <div
+              id="user-menu"
+              class="absolute right-0 mt-2 hidden w-48 rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5"
+            >
+              <a
+                href="#"
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                >Perfil</a
+              >
+              <a
+                href="#"
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                >Sair</a
+              >
+            </div>
+          </div>
+        </nav>
+        <button
+          id="mobile-menu-button"
+          class="md:hidden"
+          aria-label="Abrir menu móvel"
+        >
+          <i class="fas fa-bars text-gray-700"></i>
+        </button>
+      </div>
+    </header>
+
+    <div
+      id="mobile-menu"
+      class="fixed inset-0 z-50 hidden bg-gray-800 bg-opacity-75"
+    >
+      <div class="flex justify-end p-4">
+        <button
+          id="close-menu-button"
+          class="text-white"
+          aria-label="Fechar menu móvel"
+        >
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <nav>
+        <ul class="flex flex-col items-center space-y-4 text-lg text-white">
+          <li><a href="#" class="hover:text-gray-300">Home</a></li>
+          <li><a href="#" class="hover:text-gray-300">Progresso</a></li>
+          <li><a href="#" class="hover:text-gray-300">Configurações</a></li>
+          <li><a href="#" class="hover:text-gray-300">Perfil</a></li>
+          <li><a href="#" class="hover:text-gray-300">Sair</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <main class="home flex h-full flex-1 items-center justify-center">
       <h1>Escolha uma matéria</h1>
 
       <a href="./matematica.html" class="btn">Matemática</a>
@@ -24,5 +119,27 @@
 
       <a href="./historia.html" class="btn">História</a>
     </main>
+
+    <footer
+      class="mx-auto flex w-full shrink-0 flex-col items-center gap-2 border-t bg-white px-4 py-6 sm:flex-row md:px-6"
+    >
+      <p class="text-xs text-gray-700">
+        © 2024 EduQuiz Inc. Todos os direitos reservados.
+      </p>
+      <nav class="flex gap-4 sm:ml-auto sm:gap-6">
+        <a
+          class="text-xs text-gray-700 underline-offset-4 hover:underline"
+          href="#"
+          >Termos de Serviço</a
+        >
+        <a
+          class="text-xs text-gray-700 underline-offset-4 hover:underline"
+          href="#"
+          >Privacidade</a
+        >
+      </nav>
+    </footer>
+
+    <script src="./menu.js"></script>
   </body>
 </html>
