@@ -55,7 +55,7 @@
                 alt="User avatar"
               />
             </button>
-            <!-- Dropdown menu, show/hide based on menu state -->
+
             <div
               id="user-menu"
               class="absolute right-0 mt-2 hidden w-48 rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5"
@@ -66,7 +66,7 @@
                 >Perfil</a
               >
               <a
-                href="#"
+                href="./index.html"
                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                 >Sair</a
               >
@@ -102,7 +102,7 @@
           <li><a href="#" class="hover:text-gray-300">Progresso</a></li>
           <li><a href="#" class="hover:text-gray-300">Configurações</a></li>
           <li><a href="#" class="hover:text-gray-300">Perfil</a></li>
-          <li><a href="#" class="hover:text-gray-300">Sair</a></li>
+          <li><a href="./index.html" class="hover:text-gray-300">Sair</a></li>
         </ul>
       </nav>
     </div>
@@ -110,18 +110,19 @@
     <main
       class="container mx-auto flex flex-grow flex-col items-center justify-center px-4 py-8"
     >
-      <section id="game" class="flex flex-col items-center justify-center">
+      <section
+        id="game"
+        class="flex w-full flex-col items-center justify-center"
+      >
         <div class="mb-8">
           <div
             id="timer"
-            class="flex h-24 w-24 items-center justify-center rounded-full bg-teal-700 text-4xl font-bold text-white"
+            class="flex h-16 w-16 items-center justify-center rounded-full bg-teal-700 text-3xl font-bold text-white"
           >
             90
           </div>
         </div>
-        <div
-          class="min-w-xl relative w-full max-w-2xl rounded-lg bg-white p-6 shadow-md"
-        >
+        <div class="w-full max-w-3xl rounded-lg bg-white p-6 shadow-md">
           <div class="mb-6 flex items-center justify-between">
             <h1 class="text-2xl font-bold text-gray-900">Quiz</h1>
             <div id="progress" class="text-lg font-semibold text-gray-600">
@@ -135,7 +136,7 @@
         </div>
         <div
           id="explanation-container"
-          class="mt-4 hidden w-full rounded-lg bg-white p-6 text-gray-700 shadow-md"
+          class="mt-4 hidden w-full max-w-3xl rounded-lg bg-white p-6 text-gray-700 shadow-md"
         >
           <strong class="text-xl font-semibold text-gray-800"
             >Explicação:
@@ -201,14 +202,12 @@
       </form>
     </main>
 
-    <div class="container mx-auto mb-4 px-4">
-      <button
-        id="sound-toggle"
-        class="float-right rounded-full bg-teal-700 p-3 text-white shadow-lg transition-colors hover:bg-teal-800"
-      >
-        <i class="fas fa-volume-up"></i>
-      </button>
-    </div>
+    <button
+      id="sound-toggle"
+      class="relative bottom-2 ml-auto mr-2 flex h-10 w-10 items-center justify-center rounded-full bg-teal-700 p-3 text-white shadow-lg transition-colors hover:bg-teal-800"
+    >
+      <i class="fas fa-volume-up"></i>
+    </button>
 
     <footer
       class="mx-auto flex w-full shrink-0 flex-col items-center gap-2 border-t bg-white px-4 py-6 sm:flex-row md:px-6"
@@ -230,366 +229,9 @@
       </nav>
     </footer>
 
-    <script>
-      const gameElement = document.getElementById('game');
-      const timerElement = document.getElementById('timer');
-      const questionElement = document.getElementById('question');
-      const optionsElement = document.getElementById('options');
-      const explanationContainerElement = document.getElementById(
-        'explanation-container',
-      );
-      const explanationElement = document.getElementById('explanation');
-      const soundToggleButton = document.getElementById('sound-toggle');
-      const progressElement = document.getElementById('progress');
-      const successFeedbackElement =
-        document.getElementById('success-feedback');
-      const failureFeedbackElement =
-        document.getElementById('failure-feedback');
-
-      const TIMER_IN_SECONDS = 90;
-      let timeLeft = TIMER_IN_SECONDS;
-      let timerInterval;
-      let isSoundOn = true;
-      let currentQuestionIndex = 0;
-      let correctAnswers = 0;
-
-      const allQuestions = [
-        {
-          question:
-            'Quando estamos com saúde, temos disposição para comer, nadar, brincar, estudar e realizar muitas atividades. A energia de que precisamos para essas tarefas conseguimos adquirir com:',
-          options: [
-            'Refrigerantes.',
-            'A água que mata a sede.',
-            'Uma alimentação bem equilibrada.',
-            'As vacinas que tomamos.',
-          ],
-          correctAnswer: 2,
-          explanation:
-            'Porque uma alimentação equilibrada nos fornece a energia necessária para realizar nossas atividades.',
-        },
-        {
-          question:
-            'Quando jogo meu pião no chão e ele roda em torno dele mesmo, faz lembrar o movimento que a Terra faz em volta dela mesma. Este movimento permite a ocorrência dos dias e das noites. Conhecemos este movimento como:',
-          options: ['Eclipse.', 'Acomodação.', 'Rotação.', 'Órbita.'],
-          correctAnswer: 2,
-          explanation:
-            'A rotação é o movimento que a Terra faz ao girar em torno de si mesma, causando o dia e a noite.',
-        },
-        {
-          question:
-            'Uma fonte de energia é de onde uma energia surge. Atualmente, o ser humano explora diferentes fontes de energia, como o sol, o vento e a água. As energias produzidas pelo sol e pelo vento são chamadas:',
-          options: [
-            'Energia nuclear e energia eólica.',
-            'Energia hidroelétrica e energia atômica.',
-            'Energia solar e energia eólica.',
-            'Energia eólica e energia hidroelétrica.',
-          ],
-          correctAnswer: 2,
-          explanation:
-            'A energia produzida pelo sol é chamada de energia solar, e a produzida pelo vento é chamada de energia eólica.',
-        },
-        {
-          question:
-            'A biosfera inclui todos os ecossistemas que estão presentes desde as altas montanhas até o fundo do mar. As três principais camadas que compõem a biosfera são:',
-          options: [
-            'Geosfera, criosfera e exosfera.',
-            'Endosfera, astenosfera e litosfera.',
-            'Ecosfera, hidrosfera e geosfera.',
-            'Litosfera, atmosfera e hidrosfera.',
-          ],
-          correctAnswer: 3,
-          explanation:
-            'A biosfera é composta pela litosfera (terra), hidrosfera (água) e atmosfera (ar).',
-        },
-        {
-          question:
-            'A biosfera apresenta uma natureza dinâmica em sua composição, com todos os seus elementos interagindo e modificando-se mutuamente. Um exemplo dessa dinâmica é:',
-          options: [
-            'O deslocamento das massas de ar, provocando as chuvas.',
-            'O choque entre placas tectônicas, gerando terremotos.',
-            'A ação das chuvas, interferindo no relevo e na vegetação.',
-            'O escoamento dos rios, que deságuam nas áreas oceânicas.',
-          ],
-          correctAnswer: 2,
-          explanation:
-            'As chuvas podem modificar o relevo e afetar as plantas, mostrando como os elementos da biosfera interagem.',
-        },
-        {
-          question:
-            'A estrutura interna do nosso planeta é dividida em partes. No manto há um material muito quente e pastoso formado por rochas derretidas que recebe o nome de:',
-          options: ['Magma.', 'Lava.', 'Crosta terrestre.', 'Ferro.'],
-          correctAnswer: 0,
-          explanation:
-            'O magma é o material derretido e quente que fica no manto da Terra.',
-        },
-        {
-          question:
-            'Há vários vulcões no nosso planeta, e quando eles entram em erupção liberam gases, cinzas e um material viscoso e quente chamado de:',
-          options: ['Magma.', 'Núcleo.', 'Crosta terrestre.', 'Lava.'],
-          correctAnswer: 3,
-          explanation: 'Quando o magma sai do vulcão, chamamos de lava.',
-        },
-        {
-          question:
-            'Sobre os recursos naturais renováveis e não-renováveis, marque a alternativa correta. São recursos naturais renováveis:',
-          options: [
-            'Água, solo, ouro e vegetais.',
-            'Água, solo, ar e petróleo.',
-            'Ouro, ferro, solo e petróleo.',
-            'Vegetais, solo, ar e água.',
-          ],
-          correctAnswer: 3,
-          explanation:
-            'Vegetais, solo, ar e água são recursos que podem ser renovados se usados corretamente.',
-        },
-        {
-          question:
-            'Os recursos naturais renováveis podem se esgotar se forem usados de forma predatória. Assinale a alternativa que indica uma medida de preservação e manutenção desses recursos:',
-          options: [
-            'Ampliação das áreas de cultivo do solo.',
-            'Implantação de sistemas de irrigação sem controle.',
-            'Uso de agrotóxicos e fertilizantes com muita intensidade nas lavouras.',
-            'Diminuição do consumo e reaproveitamento dos materiais recicláveis.',
-          ],
-          correctAnswer: 3,
-          explanation:
-            'Diminuir o consumo e reciclar ajuda a preservar os recursos naturais renováveis.',
-        },
-        {
-          question: 'Qual é o astro que é o centro do nosso sistema solar?',
-          options: ['A Lua.', 'O Sol.', 'A Terra.', 'Marte.'],
-          correctAnswer: 1,
-          explanation: 'O Sol é a estrela no centro do nosso sistema solar.',
-        },
-        {
-          question:
-            'Qual é o gás essencial para a respiração humana encontrado na atmosfera?',
-          options: [
-            'Hidrogênio.',
-            'Gás carbônico.',
-            'Oxigênio.',
-            'Nitrogênio.',
-          ],
-          correctAnswer: 2,
-          explanation: 'O oxigênio é o gás que precisamos para respirar.',
-        },
-        {
-          question: 'Qual dos seguintes é um animal mamífero?',
-          options: ['Sapo.', 'Águia.', 'Cachorro.', 'Cobra.'],
-          correctAnswer: 2,
-          explanation:
-            'O cachorro é um mamífero, pois tem pelos e alimenta seus filhotes com leite.',
-        },
-        {
-          question:
-            'A água muda de estado físico quando aquecida ou resfriada. Quando a água passa do estado líquido para o gasoso, isso é chamado de:',
-          options: ['Fusão.', 'Solidificação.', 'Evaporação.', 'Condensação.'],
-          correctAnswer: 2,
-          explanation:
-            'A evaporação é quando a água líquida se transforma em vapor.',
-        },
-        {
-          question: 'Qual é o maior órgão do corpo humano?',
-          options: ['Coração.', 'Pulmão.', 'Pele.', 'Fígado.'],
-          correctAnswer: 2,
-          explanation:
-            'A pele é o maior órgão do nosso corpo, cobrindo toda a superfície.',
-        },
-        {
-          question: 'Qual destes é um planeta do sistema solar?',
-          options: ['Plutão.', 'Estrela Polar.', 'Saturno.', 'Lua.'],
-          correctAnswer: 2,
-          explanation: 'Saturno é um planeta conhecido por seus anéis.',
-        },
-        {
-          question:
-            'O ciclo da água envolve vários processos. A queda de água em forma de chuva é chamada de:',
-          options: [
-            'Evaporação.',
-            'Precipitação.',
-            'Infiltração.',
-            'Transpiração.',
-          ],
-          correctAnswer: 1,
-          explanation:
-            'A precipitação é quando a água cai das nuvens em forma de chuva.',
-        },
-        {
-          question: 'Qual é a função das raízes nas plantas?',
-          options: [
-            'Realizar a fotossíntese.',
-            'Absorver água e nutrientes do solo.',
-            'Produzir sementes.',
-            'Atrair polinizadores.',
-          ],
-          correctAnswer: 1,
-          explanation: 'As raízes absorvem água e nutrientes para a planta.',
-        },
-        {
-          question:
-            'Qual destes é um exemplo de fonte de energia não renovável?',
-          options: [
-            'Petróleo.',
-            'Energia solar.',
-            'Energia eólica.',
-            'Energia hidrelétrica.',
-          ],
-          correctAnswer: 0,
-          explanation:
-            'O petróleo é um recurso que pode acabar um dia e não se renova rapidamente.',
-        },
-        {
-          question:
-            'Qual é o processo pelo qual as plantas utilizam luz solar para produzir alimento?',
-          options: [
-            'Respiração.',
-            'Fotossíntese.',
-            'Transpiração.',
-            'Digestão.',
-          ],
-          correctAnswer: 1,
-          explanation:
-            'A fotossíntese é o processo pelo qual as plantas produzem seu próprio alimento.',
-        },
-        {
-          question:
-            'Os animais que se alimentam somente de plantas são chamados de:',
-          options: [
-            'Carnívoros.',
-            'Onívoros.',
-            'Herbívoros.',
-            'Decompositores.',
-          ],
-          correctAnswer: 2,
-          explanation: 'Herbívoros são animais que comem apenas plantas.',
-        },
-      ];
-      const questions = [...allQuestions]
-        .sort(() => Math.random() - 0.5)
-        .slice(0, 8);
-
-      function startTimer() {
-        clearInterval(timerInterval); // Ensure any previous interval is cleared
-        timerInterval = setInterval(() => {
-          timeLeft--;
-          timerElement.textContent = timeLeft;
-          if (timeLeft <= 0) {
-            clearInterval(timerInterval);
-            goToNextQuestion();
-          }
-        }, 1000);
-      }
-
-      function resetTimer() {
-        timeLeft = TIMER_IN_SECONDS;
-        timerElement.textContent = timeLeft;
-        startTimer();
-      }
-
-      function loadQuestion() {
-        const question = questions[currentQuestionIndex];
-        questionElement.textContent = question.question;
-        optionsElement.innerHTML = '';
-        progressElement.textContent = `Pergunta ${currentQuestionIndex + 1} de ${questions.length}`;
-        explanationContainerElement.classList.add('hidden');
-        explanationElement.textContent = '';
-
-        question.options.forEach((option, index) => {
-          const button = document.createElement('button');
-          button.textContent = option;
-          button.className =
-            'w-full text-left p-4 bg-gray-100 hover:bg-gray-200 rounded-md transition-colors disabled:pointer-events-none';
-          button.onclick = () => selectAnswer(index);
-          optionsElement.appendChild(button);
-        });
-
-        resetTimer(); // Start the timer for the new question
-      }
-
-      function selectAnswer(index) {
-        // Stop the timer as soon as an answer is selected
-        clearInterval(timerInterval);
-
-        const question = questions[currentQuestionIndex];
-        const buttons = optionsElement.getElementsByTagName('button');
-
-        // Disable all buttons
-        for (let i = 0; i < buttons.length; i++) {
-          const button = buttons[i];
-          button.disabled = true;
-        }
-
-        // Highlight correct and selected answers
-        buttons[question.correctAnswer].classList.add(
-          'bg-green-600',
-          'text-white',
-        );
-        if (index !== question.correctAnswer) {
-          buttons[index].classList.add('bg-red-600', 'text-white');
-        } else {
-          correctAnswers++;
-        }
-
-        // Show explanation
-        explanationElement.textContent = question.explanation;
-        explanationContainerElement.classList.remove('hidden');
-
-        // Move to the next question after a delay
-        setTimeout(() => {
-          goToNextQuestion();
-        }, 3000);
-      }
-
-      function goToNextQuestion() {
-        currentQuestionIndex++;
-        if (currentQuestionIndex < questions.length) {
-          loadQuestion();
-        } else {
-          showFeedback();
-        }
-      }
-
-      function showFeedback() {
-        const scorePercentage = (correctAnswers / questions.length) * 100;
-        if (scorePercentage >= 70) {
-          successFeedbackElement.hidden = false;
-        } else {
-          failureFeedbackElement.hidden = false;
-        }
-
-        gameElement.hidden = true;
-        gameElement.classList.add('hidden');
-
-        successFeedbackElement.addEventListener('submit', function (e) {
-          e.preventDefault();
-          window.location.href = 'home.html';
-        });
-        successFeedbackElement.addEventListener('reset', function (e) {
-          e.preventDefault();
-          window.location.reload();
-        });
-
-        failureFeedbackElement.addEventListener('submit', function (e) {
-          e.preventDefault();
-          window.location.href = 'home.html';
-        });
-        failureFeedbackElement.addEventListener('reset', function (e) {
-          e.preventDefault();
-          window.location.reload();
-        });
-      }
-
-      function toggleSound() {
-        isSoundOn = !isSoundOn;
-        soundToggleButton.innerHTML = isSoundOn
-          ? '<i class="fas fa-volume-up"></i>'
-          : '<i class="fas fa-volume-mute"></i>';
-      }
-
-      soundToggleButton.addEventListener('click', toggleSound);
-
-      // Initialize the quiz
-      loadQuestion();
-    </script>
+    <script src="js/menu.js"></script>
+    <script src="js/user-menu.js"></script>
+    <script src="js/ciencias.js"></script>
+    <script src="js/quiz.js"></script>
   </body>
 </html>

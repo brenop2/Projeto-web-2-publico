@@ -55,7 +55,7 @@
                 alt="User avatar"
               />
             </button>
-            <!-- Dropdown menu, show/hide based on menu state -->
+
             <div
               id="user-menu"
               class="absolute right-0 mt-2 hidden w-48 rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5"
@@ -66,7 +66,7 @@
                 >Perfil</a
               >
               <a
-                href="#"
+                href="./index.html"
                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                 >Sair</a
               >
@@ -102,7 +102,7 @@
           <li><a href="#" class="hover:text-gray-300">Progresso</a></li>
           <li><a href="#" class="hover:text-gray-300">Configurações</a></li>
           <li><a href="#" class="hover:text-gray-300">Perfil</a></li>
-          <li><a href="#" class="hover:text-gray-300">Sair</a></li>
+          <li><a href="./index.html" class="hover:text-gray-300">Sair</a></li>
         </ul>
       </nav>
     </div>
@@ -110,18 +110,19 @@
     <main
       class="container mx-auto flex flex-grow flex-col items-center justify-center px-4 py-8"
     >
-      <section id="game" class="flex flex-col items-center justify-center">
+      <section
+        id="game"
+        class="flex w-full flex-col items-center justify-center"
+      >
         <div class="mb-8">
           <div
             id="timer"
-            class="flex h-24 w-24 items-center justify-center rounded-full bg-teal-700 text-4xl font-bold text-white"
+            class="flex h-16 w-16 items-center justify-center rounded-full bg-teal-700 text-3xl font-bold text-white"
           >
             90
           </div>
         </div>
-        <div
-          class="min-w-xl relative w-full max-w-2xl rounded-lg bg-white p-6 shadow-md"
-        >
+        <div class="w-full max-w-3xl rounded-lg bg-white p-6 shadow-md">
           <div class="mb-6 flex items-center justify-between">
             <h1 class="text-2xl font-bold text-gray-900">Quiz</h1>
             <div id="progress" class="text-lg font-semibold text-gray-600">
@@ -135,7 +136,7 @@
         </div>
         <div
           id="explanation-container"
-          class="mt-4 hidden w-full rounded-lg bg-white p-6 text-gray-700 shadow-md"
+          class="mt-4 hidden w-full max-w-3xl rounded-lg bg-white p-6 text-gray-700 shadow-md"
         >
           <strong class="text-xl font-semibold text-gray-800"
             >Explicação:
@@ -201,14 +202,12 @@
       </form>
     </main>
 
-    <div class="container mx-auto mb-4 px-4">
-      <button
-        id="sound-toggle"
-        class="float-right rounded-full bg-teal-700 p-3 text-white shadow-lg transition-colors hover:bg-teal-800"
-      >
-        <i class="fas fa-volume-up"></i>
-      </button>
-    </div>
+    <button
+      id="sound-toggle"
+      class="relative bottom-2 ml-auto mr-2 flex h-10 w-10 items-center justify-center rounded-full bg-teal-700 p-3 text-white shadow-lg transition-colors hover:bg-teal-800"
+    >
+      <i class="fas fa-volume-up"></i>
+    </button>
 
     <footer
       class="mx-auto flex w-full shrink-0 flex-col items-center gap-2 border-t bg-white px-4 py-6 sm:flex-row md:px-6"
@@ -230,399 +229,9 @@
       </nav>
     </footer>
 
-    <script>
-      const gameElement = document.getElementById('game');
-      const timerElement = document.getElementById('timer');
-      const questionElement = document.getElementById('question');
-      const optionsElement = document.getElementById('options');
-      const explanationContainerElement = document.getElementById(
-        'explanation-container',
-      );
-      const explanationElement = document.getElementById('explanation');
-      const soundToggleButton = document.getElementById('sound-toggle');
-      const progressElement = document.getElementById('progress');
-      const successFeedbackElement =
-        document.getElementById('success-feedback');
-      const failureFeedbackElement =
-        document.getElementById('failure-feedback');
-
-      const TIMER_IN_SECONDS = 90;
-      let timeLeft = TIMER_IN_SECONDS;
-      let timerInterval;
-      let isSoundOn = true;
-      let currentQuestionIndex = 0;
-      let correctAnswers = 0;
-
-      const allQuestions = [
-        {
-          question:
-            'Sobre o período da escravidão no Brasil é correto afirmar:',
-          options: [
-            'Os negros formavam suas comunidades isoladas.',
-            'Os negros formavam suas comunidades nos engenhos de açúcar.',
-            'Os negros formavam suas comunidades nos centros das cidades.',
-            'Os negros formavam suas comunidades em espaços abertos.',
-          ],
-          correctAnswer: 0,
-          explanation:
-            'Durante a escravidão, os negros que fugiam formavam comunidades isoladas chamadas quilombos.',
-        },
-        {
-          question:
-            'Esses povos eram chamados de _____________________, palavra que se refere àqueles que não tinham moradia fixa e por isso se mudavam de acordo com a oferta de alimentos e com o clima de cada lugar.',
-          options: [
-            'Pré-história.',
-            'Sedentários.',
-            'Paleolítico.',
-            'Nômades.',
-          ],
-          correctAnswer: 3,
-          explanation:
-            'Nômades são pessoas que não têm moradia fixa e se mudam de lugar em lugar.',
-        },
-        {
-          question:
-            'Quais eram os utensílios utilizados pelos primeiros grupos humanos?',
-          options: [
-            'Faca, rodas, pontas de lanças.',
-            'Somente facas e espadas.',
-            'Somente raspadores.',
-            'Machados, facas e outros instrumentos pontiagudos.',
-          ],
-          correctAnswer: 3,
-          explanation:
-            'Os primeiros humanos usavam ferramentas simples como machados e facas para caçar e coletar.',
-        },
-        {
-          question:
-            'Para obter boas condições de vida, o homem neolítico procurava moradia próxima aos rios com a intenção de:',
-          options: [
-            'Utilizar a terra fértil para a agricultura.',
-            'Porque eles acreditavam ser uma área fértil.',
-            'Pescar com mais facilidade.',
-            'Pegar água com mais facilidade para preparar os alimentos.',
-          ],
-          correctAnswer: 0,
-          explanation:
-            'Porque perto dos rios a terra é fértil, boa para plantar alimentos.',
-        },
-        {
-          question:
-            'A agricultura marcou o início da civilização, pois graças a ela os seres humanos deixaram de ser nômades e se tornaram sedentários. O crescimento da agricultura contribuiu para:',
-          options: [
-            'A criação de animais domésticos.',
-            'A descoberta do fogo e o nomadismo dos seres humanos.',
-            'O surgimento da prática do comércio, atividade diferenciada que ainda não existia.',
-            'A mecanização do campo.',
-          ],
-          correctAnswer: 0,
-          explanation:
-            'Com a agricultura, as pessoas começaram a criar animais domésticos para ajudar e fornecer alimentos.',
-        },
-        {
-          question:
-            'Por que na pré-história os povos se instalavam nas margens dos rios?',
-          options: [
-            'Porque viviam em bandos e ajudavam uns aos outros na obtenção de alimentos.',
-            'Para coletar frutos, raízes e ovos.',
-            'Para fabricar machados, facas e outros instrumentos pontiagudos.',
-            'Para desenvolver a agricultura.',
-          ],
-          correctAnswer: 3,
-          explanation:
-            'Porque perto dos rios podiam plantar e colher alimentos com mais facilidade.',
-        },
-        {
-          question:
-            'Qual foi o principal objetivo das Grandes Navegações no século XV?',
-          options: [
-            'Descobrir novas terras para colonizar.',
-            'Encontrar uma rota marítima para as Índias.',
-            'Espalhar a religião cristã pelo mundo.',
-            'Provar que a Terra era redonda.',
-          ],
-          correctAnswer: 1,
-          explanation:
-            'Os europeus queriam chegar às Índias navegando para conseguir especiarias.',
-        },
-        {
-          question: 'Quem foi o descobridor oficial do Brasil?',
-          options: [
-            'Pedro Álvares Cabral.',
-            'Cristóvão Colombo.',
-            'Vasco da Gama.',
-            'Fernão de Magalhães.',
-          ],
-          correctAnswer: 0,
-          explanation: 'Pedro Álvares Cabral chegou ao Brasil em 1500.',
-        },
-        {
-          question:
-            'Qual foi a principal atividade econômica no Brasil durante o período colonial?',
-          options: [
-            'A extração de pau-brasil.',
-            'A mineração de ouro.',
-            'O cultivo de cana-de-açúcar.',
-            'A produção de café.',
-          ],
-          correctAnswer: 2,
-          explanation:
-            'A cana-de-açúcar era cultivada e exportada para a Europa.',
-        },
-        {
-          question: 'O que foi a Inconfidência Mineira?',
-          options: [
-            'Um movimento de independência no Rio de Janeiro.',
-            'Uma revolta de escravos em São Paulo.',
-            'Uma tentativa de independência em Minas Gerais.',
-            'Uma festa popular em Minas Gerais.',
-          ],
-          correctAnswer: 2,
-          explanation:
-            'A Inconfidência Mineira foi um movimento que queria a independência de Minas Gerais do Brasil colonial.',
-        },
-        {
-          question: 'Quem proclamou a independência do Brasil em 1822?',
-          options: [
-            'Dom Pedro I.',
-            'Dom Pedro II.',
-            'Tiradentes.',
-            'Getúlio Vargas.',
-          ],
-          correctAnswer: 0,
-          explanation:
-            "Dom Pedro I proclamou a independência do Brasil com o 'Grito do Ipiranga'.",
-        },
-        {
-          question: 'O que foi a Lei Áurea, assinada em 1888?',
-          options: [
-            'A lei que proibiu a imigração.',
-            'A lei que aboliu a escravidão no Brasil.',
-            'A lei que declarou a independência do Brasil.',
-            'A lei que criou a primeira constituição brasileira.',
-          ],
-          correctAnswer: 1,
-          explanation: 'A Lei Áurea acabou com a escravidão no Brasil.',
-        },
-        {
-          question: 'Quem assinou a Lei Áurea?',
-          options: [
-            'Princesa Isabel.',
-            'Dom Pedro I.',
-            'Dom Pedro II.',
-            'Getúlio Vargas.',
-          ],
-          correctAnswer: 0,
-          explanation: 'A Princesa Isabel assinou a Lei Áurea em 1888.',
-        },
-        {
-          question: 'Qual país europeu colonizou o Brasil?',
-          options: ['Espanha.', 'Inglaterra.', 'Portugal.', 'França.'],
-          correctAnswer: 2,
-          explanation: 'Portugal foi o país que colonizou o Brasil.',
-        },
-        {
-          question: 'O que os indígenas faziam antes da chegada dos europeus?',
-          options: [
-            'Viviam em cidades grandes.',
-            'Praticavam agricultura e caça.',
-            'Construíam estradas e pontes.',
-            'Já usavam armas de fogo.',
-          ],
-          correctAnswer: 1,
-          explanation:
-            'Os indígenas cultivavam plantas e caçavam para se alimentar.',
-        },
-        {
-          question:
-            'O que representou a chegada da família real portuguesa ao Brasil em 1808?',
-          options: [
-            'A transferência da capital para o Rio de Janeiro.',
-            'A independência do Brasil.',
-            'A abolição da escravidão.',
-            'A descoberta do ouro em Minas Gerais.',
-          ],
-          correctAnswer: 0,
-          explanation:
-            'A família real mudou a capital para o Rio de Janeiro e trouxe mudanças importantes.',
-        },
-        {
-          question: 'Quem foi Tiradentes?',
-          options: [
-            'Um líder da Inconfidência Mineira.',
-            'O primeiro presidente do Brasil.',
-            'Um explorador português.',
-            'Um imperador do Brasil.',
-          ],
-          correctAnswer: 0,
-          explanation:
-            'Tiradentes foi um dos líderes da Inconfidência Mineira.',
-        },
-        {
-          question: 'Qual foi a primeira capital do Brasil?',
-          options: ['Rio de Janeiro.', 'São Paulo.', 'Salvador.', 'Brasília.'],
-          correctAnswer: 2,
-          explanation: 'Salvador foi a primeira capital do Brasil.',
-        },
-        {
-          question: 'O que foi o descobrimento do Brasil?',
-          options: [
-            'A chegada dos portugueses às terras que hoje são o Brasil.',
-            'A construção de Brasília.',
-            'A independência do Brasil.',
-            'A abolição da escravidão.',
-          ],
-          correctAnswer: 0,
-          explanation:
-            'Em 1500, os portugueses chegaram ao território que hoje é o Brasil.',
-        },
-        {
-          question: 'Em que ano o Brasil se tornou uma república?',
-          options: ['1822.', '1888.', '1889.', '1500.'],
-          correctAnswer: 2,
-          explanation:
-            'Em 1889, o Brasil deixou de ser um império e se tornou uma república.',
-        },
-        {
-          question:
-            'Quem foi o primeiro presidente do Brasil após a proclamação da república?',
-          options: [
-            'Getúlio Vargas.',
-            'Marechal Deodoro da Fonseca.',
-            'Dom Pedro II.',
-            'Juscelino Kubitschek.',
-          ],
-          correctAnswer: 1,
-          explanation:
-            'Marechal Deodoro da Fonseca foi o primeiro presidente do Brasil após a proclamação da república em 1889.',
-        },
-      ];
-      const questions = [...allQuestions]
-        .sort(() => Math.random() - 0.5)
-        .slice(0, 8);
-
-      function startTimer() {
-        clearInterval(timerInterval); // Ensure any previous interval is cleared
-        timerInterval = setInterval(() => {
-          timeLeft--;
-          timerElement.textContent = timeLeft;
-          if (timeLeft <= 0) {
-            clearInterval(timerInterval);
-            goToNextQuestion();
-          }
-        }, 1000);
-      }
-
-      function resetTimer() {
-        timeLeft = TIMER_IN_SECONDS;
-        timerElement.textContent = timeLeft;
-        startTimer();
-      }
-
-      function loadQuestion() {
-        const question = questions[currentQuestionIndex];
-        questionElement.textContent = question.question;
-        optionsElement.innerHTML = '';
-        progressElement.textContent = `Pergunta ${currentQuestionIndex + 1} de ${questions.length}`;
-        explanationContainerElement.classList.add('hidden');
-        explanationElement.textContent = '';
-
-        question.options.forEach((option, index) => {
-          const button = document.createElement('button');
-          button.textContent = option;
-          button.className =
-            'w-full text-left p-4 bg-gray-100 hover:bg-gray-200 rounded-md transition-colors disabled:pointer-events-none';
-          button.onclick = () => selectAnswer(index);
-          optionsElement.appendChild(button);
-        });
-
-        resetTimer(); // Start the timer for the new question
-      }
-
-      function selectAnswer(index) {
-        // Stop the timer as soon as an answer is selected
-        clearInterval(timerInterval);
-
-        const question = questions[currentQuestionIndex];
-        const buttons = optionsElement.getElementsByTagName('button');
-
-        // Disable all buttons
-        for (let i = 0; i < buttons.length; i++) {
-          const button = buttons[i];
-          button.disabled = true;
-        }
-
-        // Highlight correct and selected answers
-        buttons[question.correctAnswer].classList.add(
-          'bg-green-600',
-          'text-white',
-        );
-        if (index !== question.correctAnswer) {
-          buttons[index].classList.add('bg-red-600', 'text-white');
-        } else {
-          correctAnswers++;
-        }
-
-        // Show explanation
-        explanationElement.textContent = question.explanation;
-        explanationContainerElement.classList.remove('hidden');
-
-        // Move to the next question after a delay
-        setTimeout(() => {
-          goToNextQuestion();
-        }, 3000);
-      }
-
-      function goToNextQuestion() {
-        currentQuestionIndex++;
-        if (currentQuestionIndex < questions.length) {
-          loadQuestion();
-        } else {
-          showFeedback();
-        }
-      }
-
-      function showFeedback() {
-        const scorePercentage = (correctAnswers / questions.length) * 100;
-        if (scorePercentage >= 70) {
-          successFeedbackElement.hidden = false;
-        } else {
-          failureFeedbackElement.hidden = false;
-        }
-
-        gameElement.hidden = true;
-        gameElement.classList.add('hidden');
-
-        successFeedbackElement.addEventListener('submit', function (e) {
-          e.preventDefault();
-          window.location.href = 'home.html';
-        });
-        successFeedbackElement.addEventListener('reset', function (e) {
-          e.preventDefault();
-          window.location.reload();
-        });
-
-        failureFeedbackElement.addEventListener('submit', function (e) {
-          e.preventDefault();
-          window.location.href = 'home.html';
-        });
-        failureFeedbackElement.addEventListener('reset', function (e) {
-          e.preventDefault();
-          window.location.reload();
-        });
-      }
-
-      function toggleSound() {
-        isSoundOn = !isSoundOn;
-        soundToggleButton.innerHTML = isSoundOn
-          ? '<i class="fas fa-volume-up"></i>'
-          : '<i class="fas fa-volume-mute"></i>';
-      }
-
-      soundToggleButton.addEventListener('click', toggleSound);
-
-      // Initialize the quiz
-      loadQuestion();
-    </script>
+    <script src="js/menu.js"></script>
+    <script src="js/user-menu.js"></script>
+    <script src="js/historia.js"></script>
+    <script src="js/quiz.js"></script>
   </body>
 </html>
