@@ -110,28 +110,32 @@
     <main
       class="container mx-auto flex flex-grow flex-col items-center justify-center px-4 py-8"
     >
-      <div class="mb-8">
-        <div
-          id="timer"
-          class="flex h-24 w-24 items-center justify-center rounded-full bg-teal-700 text-4xl font-bold text-white"
-        >
-          90
-        </div>
-      </div>
-      <div class="relative w-full max-w-2xl rounded-lg bg-white p-6 shadow-md">
-        <div class="mb-6 flex items-center justify-between">
-          <h1 class="text-2xl font-bold text-gray-900">Quiz</h1>
-          <div id="progress" class="text-lg font-semibold text-gray-600">
-            Pergunta 1 de 8
+      <section id="game" class="flex flex-col items-center justify-center">
+        <div class="mb-8">
+          <div
+            id="timer"
+            class="flex h-24 w-24 items-center justify-center rounded-full bg-teal-700 text-4xl font-bold text-white"
+          >
+            90
           </div>
         </div>
-        <h2 id="question" class="mb-4 text-xl font-semibold text-gray-800">
-          Carregando pergunta...
-        </h2>
-        <div id="options" class="space-y-4"></div>
-      </div>
+        <div
+          class="relative w-full max-w-2xl rounded-lg bg-white p-6 shadow-md"
+        >
+          <div class="mb-6 flex items-center justify-between">
+            <h1 class="text-2xl font-bold text-gray-900">Quiz</h1>
+            <div id="progress" class="text-lg font-semibold text-gray-600">
+              Pergunta 1 de 8
+            </div>
+          </div>
+          <h2 id="question" class="mb-4 text-xl font-semibold text-gray-800">
+            Carregando pergunta...
+          </h2>
+          <div id="options" class="space-y-4"></div>
+        </div>
+      </section>
 
-      <div
+      <form
         id="success-feedback"
         class="w-full max-w-md rounded-lg bg-white p-8 text-center shadow-lg"
         hidden
@@ -143,21 +147,21 @@
         <p class="mb-8 text-gray-600">Você completou o quiz com sucesso!</p>
         <div class="space-y-4">
           <button
-            id="restart-button"
-            class="w-full rounded-lg bg-teal-600 px-4 py-2 font-semibold text-white transition duration-300 hover:bg-teal-700"
+            type="reset"
+            class="w-full rounded-lg bg-teal-600 p-4 font-semibold text-white transition duration-300 hover:bg-teal-700"
           >
             Jogar Novamente
           </button>
           <button
-            id="home-button"
-            class="w-full rounded-lg bg-gray-200 px-4 py-2 font-semibold text-gray-800 transition duration-300 hover:bg-gray-300"
+            type="submit"
+            class="w-full rounded-lg bg-gray-200 p-4 font-semibold text-gray-800 transition duration-300 hover:bg-gray-300"
           >
             Voltar para Home
           </button>
         </div>
-      </div>
+      </form>
 
-      <div
+      <form
         id="failure-feedback"
         class="w-full max-w-md rounded-lg bg-white p-8 text-center shadow-lg"
         hidden
@@ -173,19 +177,19 @@
         </p>
         <div class="space-y-4">
           <button
-            id="retry-button"
-            class="w-full rounded-lg bg-teal-600 px-4 py-2 font-semibold text-white transition duration-300 hover:bg-teal-700"
+            type="reset"
+            class="w-full rounded-lg bg-teal-600 p-4 font-semibold text-white transition duration-300 hover:bg-teal-700"
           >
             Tentar Novamente
           </button>
           <button
-            id="home-button"
-            class="w-full rounded-lg bg-gray-200 px-4 py-2 font-semibold text-gray-800 transition duration-300 hover:bg-gray-300"
+            type="submit"
+            class="w-full rounded-lg bg-gray-200 p-4 font-semibold text-gray-800 transition duration-300 hover:bg-gray-300"
           >
             Voltar para Home
           </button>
         </div>
-      </div>
+      </form>
     </main>
 
     <div class="container mx-auto mb-4 px-4">
@@ -218,18 +222,24 @@
     </footer>
 
     <script>
+      const gameElement = document.getElementById('game');
       const timerElement = document.getElementById('timer');
       const questionElement = document.getElementById('question');
       const optionsElement = document.getElementById('options');
       const soundToggleButton = document.getElementById('sound-toggle');
       const progressElement = document.getElementById('progress');
+      const successFeedbackElement =
+        document.getElementById('success-feedback');
+      const failureFeedbackElement =
+        document.getElementById('failure-feedback');
 
-      let timeLeft = 90;
+      const TIMER_IN_SECONDS = 90;
+      let timeLeft = TIMER_IN_SECONDS;
       let timerInterval;
       let isSoundOn = true;
       let currentQuestionIndex = 0;
+      let correctAnswers = 0;
 
-      // Sample question data (replace with your actual questions)
       const questions = [
         {
           question: 'Qual é a capital do Brasil?',
@@ -296,7 +306,7 @@
       }
 
       function resetTimer() {
-        timeLeft = 90;
+        timeLeft = TIMER_IN_SECONDS;
         timerElement.textContent = timeLeft;
         startTimer();
       }
@@ -320,7 +330,8 @@
       }
 
       function selectAnswer(index) {
-        clearInterval(timerInterval); // Stop the timer as soon as an answer is selected
+        // Stop the timer as soon as an answer is selected
+        clearInterval(timerInterval);
 
         const question = questions[currentQuestionIndex];
         const buttons = optionsElement.getElementsByTagName('button');
@@ -338,6 +349,8 @@
         );
         if (index !== question.correctAnswer) {
           buttons[index].classList.add('bg-red-600', 'text-white');
+        } else {
+          correctAnswers++;
         }
 
         // Move to the next question after a delay
@@ -351,8 +364,38 @@
         if (currentQuestionIndex < questions.length) {
           loadQuestion();
         } else {
-          //alert('Quiz concluído!'); // End of the quiz
+          showFeedback();
         }
+      }
+
+      function showFeedback() {
+        const scorePercentage = (correctAnswers / questions.length) * 100;
+        if (scorePercentage >= 70) {
+          successFeedbackElement.hidden = false;
+        } else {
+          failureFeedbackElement.hidden = false;
+        }
+
+        gameElement.hidden = true;
+        gameElement.classList.add('hidden');
+
+        successFeedbackElement.addEventListener('submit', function (e) {
+          e.preventDefault();
+          window.location.href = 'home.html';
+        });
+        successFeedbackElement.addEventListener('reset', function (e) {
+          e.preventDefault();
+          window.location.reload();
+        });
+
+        failureFeedbackElement.addEventListener('submit', function (e) {
+          e.preventDefault();
+          window.location.href = 'home.html';
+        });
+        failureFeedbackElement.addEventListener('reset', function (e) {
+          e.preventDefault();
+          window.location.reload();
+        });
       }
 
       function toggleSound() {

@@ -157,7 +157,7 @@
         }
 
         if (email === 'usuario@exemplo.com' && password === 'senha123') {
-          alert('Login bem-sucedido!');
+          window.location.href = 'home.html';
           errorMessage.textContent = '';
         } else {
           errorMessage.textContent = 'E-mail ou senha incorretos.';
