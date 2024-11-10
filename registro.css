@@ -1,92 +1,102 @@
 /* Principal  */
-body {
-    background-color: #ffffff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
-    height: 100%;
-    min-height: 100vh;
-}
-/* Caixa Principal */ 
-.container {
-    
-    padding: 24px 32px;
-    border-radius: 14.4px;
-    box-shadow: 0px 4.8px 14.4px rgba(0, 0, 0, 0.15);
-    width: 360px;
-    text-align: center;
-    /*height: 100%;
-    min-height: 100vh; */
-}
-/* Titulo */ 
-.container h2 {
-    margin-bottom: 28.8px;
-    font-size: 28.8px;
-    font-weight: bold;
-    
-}
-/* Caixa de input */ 
-.input-field {
-    width: 85%; 
-    padding: 14.4px;
-    margin: 14.4px 0;
-    border: 1.2px solid #0f766e;
-    border-radius: 7.2px;
-    outline-color: #0f766e; 
-    font-size: 14px;
-}
-/* Botão registrar */ 
-.btn { 
-    width: 96%;
-    padding: 12px;
-    background-color: #0f766e;
-    color: white;
-    border: none;
-    border-radius: 4.8px;
-    cursor: pointer;
-    font-size: 17px;
 
+/* Caixa Principal */
+.registro-container {
+  width: 100%;
+  max-width: 600px;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  text-align: center;
 }
-/* QUando passar o mouse em cima do botao registrar */ 
+/* Titulo */
+.registro-container h2 {
+  margin-bottom: 28.8px;
+  font-size: 28.8px;
+  font-weight: bold;
+}
+/* Caixa de input */
+.input-group {
+  position: relative;
+  margin: 12px 0;
+}
+.input-group input {
+  width: 100%;
+  padding: 12px 12px 12px 36px; /* Espaço à esquerda para o ícone */
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  outline: none;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+.input-group i {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  color: #aaa;
+  font-size: 18px;
+  pointer-events: none;
+}
+.input-group input:focus {
+  border-color: #115e59;
+}
+
+/* Botão registrar */
+.btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #0f766e;
+  color: white;
+  border: none;
+  border-radius: 4.8px;
+  cursor: pointer;
+  font-size: 17px;
+  margin-top: 12px;
+}
+/* QUando passar o mouse em cima do botao registrar */
 .btn:hover {
-    background-color: #115e59;
+  background-color: #115e59;
 }
-/* Texto */ 
+/* Texto */
 .message {
-    margin-top: 18px;
-    font-size: 12px;
+  color: #000000;
+  margin-top: 18px;
+  font-size: 12px;
+  text-align: left;
 }
-/* Clique aqui */ 
+/* Clique aqui */
 .message a {
-    color: #0f766e;
-    text-decoration: none;
-    font-weight: bold;
+  color: #0f766e;
+  text-decoration: none;
+  font-weight: bold;
 }
 
 @media (max-width: 600px) {
-    .container {
-        width: 90%;
-        margin-top: -200px;
-        padding: 20px;
-    }
+  .container {
+    width: 90%;
+    margin-top: -200px;
+    padding: 20px;
+  }
 
-    .container h2 {
-        font-size: 24px;
-    }
+  .container h2 {
+    font-size: 24px;
+  }
 
-    .input-field {
-        width: 95%;
-        font-size: 16px;
-        padding: 12px;
-    }
+  .input-field {
+    width: 95%;
+    font-size: 16px;
+    padding: 12px;
+  }
 
-    .btn {
-        width: 100%;
-        padding: 10px;
-    }
+  .btn {
+    width: 100%;
+    padding: 10px;
+  }
 
-    .message {
-        font-size: 14px;
-    }
+  .message {
+    font-size: 14px;
+  }
 }

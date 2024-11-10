@@ -1,45 +1,175 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EduQuiz - Cadastre-se </title> <!--Nome da pagina-->
-    <link rel="stylesheet" href="./registro.css"> <!--Aqui ele esta puxando o css-->
-
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EduQuiz - Cadastre-se</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-        body {
-          font-family: 'Inter', sans-serif;
-        }
-        
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+      body {
+        font-family: 'Inter', sans-serif;
+      }
     </style>
-
-</head>
-<body>
-    <div class="container"> <!-- Classe container dentro da div pra fazer a estilização da pagina mais facil com o CSS-->
-        <h2>Cadastre-se para ter acesso ao EduQuiz</h2> <!--Titulo da caixa de cadastro-->
-          <form id="registro-form">
-            <input type="text" class="input-field" name="nome" placeholder="Nome Completo" required>
-            <input type="password" class="input-field" name="senha" placeholder="Senha" required>
-            <input type="email" class="input-field" name="email" placeholder="E-mail" required>
-            <input type="tel" class="input-field" name="telefone" placeholder="Telefone" required>
-            <button type="submit" class="btn">Registrar</button>
-          </form>
-        <p class="message">Se você já tem uma conta, clique <a href="./login.html">AQUI</a> para fazer login</p> <!--Aqui é o botão para caso o usuario ja tenha uma conta ele vai para o login-->
-      
+    <link rel="stylesheet" href="./registro.css" />
+  </head>
+  <body class="flex h-full min-h-screen flex-col">
+    <header class="flex h-20 items-center bg-white px-4 shadow-md lg:px-6">
+      <div class="container mx-auto flex h-16 items-center justify-between">
+        <a href="./index.html" class="flex items-center justify-center">
+          <i class="fas fa-graduation-cap mr-2 text-2xl text-teal-700"></i>
+          <span class="text-2xl font-bold text-teal-700">EduQuiz</span>
+        </a>
+        <nav class="hidden gap-4 sm:gap-6 md:flex">
+          <a
+            class="text-sm font-medium text-gray-700 underline-offset-4 hover:underline"
+            href="#"
+            >Recursos</a
+          >
+          <a
+            class="text-sm font-medium text-gray-700 underline-offset-4 hover:underline"
+            href="#"
+            >Preços</a
+          >
+          <a
+            class="text-sm font-medium text-gray-700 underline-offset-4 hover:underline"
+            href="#"
+            >Sobre</a
+          >
+          <a
+            class="text-sm font-medium text-gray-700 underline-offset-4 hover:underline"
+            href="./login.html"
+            >Login
+          </a>
+        </nav>
+        <button
+          id="mobile-menu-button"
+          class="md:hidden"
+          aria-label="Abrir menu móvel"
+        >
+          <i class="fas fa-bars text-gray-700"></i>
+        </button>
       </div>
+    </header>
+
+    <div
+      id="mobile-menu"
+      class="fixed inset-0 z-50 hidden bg-gray-800 bg-opacity-75"
+    >
+      <div class="flex justify-end p-4">
+        <button
+          id="close-menu-button"
+          class="text-white"
+          aria-label="Fechar menu móvel"
+        >
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <nav>
+        <ul class="flex flex-col items-center gap-4 text-lg text-white">
+          <li><a href="#" class="hover:text-gray-300">Recursos</a></li>
+          <li><a href="#" class="hover:text-gray-300">Preços</a></li>
+          <li><a href="#" class="hover:text-gray-300">Sobre</a></li>
+          <li><a href="./login.html" class="hover:text-gray-300">Login</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <main class="flex h-full flex-1 items-center justify-center bg-gray-100">
+      <div class="registro-container">
+        <h2>Cadastre-se para ter acesso ao EduQuiz</h2>
+
+        <form id="registro-form">
+          <div class="input-group">
+            <i class="fas fa-user"></i>
+            <input
+              type="text"
+              class="input-field"
+              name="nome"
+              placeholder="Nome Completo"
+              required
+            />
+          </div>
+          <div class="input-group">
+            <i class="fas fa-lock"></i>
+            <input
+              type="password"
+              class="input-field"
+              name="senha"
+              placeholder="Senha"
+              required
+            />
+          </div>
+          <div class="input-group">
+            <i class="fas fa-envelope"></i>
+            <input
+              type="email"
+              class="input-field"
+              name="email"
+              placeholder="E-mail"
+              required
+            />
+          </div>
+          <div class="input-group">
+            <i class="fas fa-phone"></i>
+            <input
+              type="tel"
+              class="input-field"
+              name="telefone"
+              placeholder="Telefone"
+              required
+            />
+          </div>
+          <button type="submit" class="btn">Registrar</button>
+          <p class="message">
+            Já tem conta?
+            <a href="./login.html">Clique aqui para fazer login</a>
+          </p>
+        </form>
+      </div>
+    </main>
+
+    <footer
+      class="mx-auto flex w-full max-w-7xl shrink-0 flex-col items-center gap-2 border-t px-4 py-6 sm:flex-row md:px-6"
+    >
+      <p class="text-xs text-gray-700">
+        © 2024 EduQuiz Inc. Todos os direitos reservados.
+      </p>
+      <nav class="flex gap-4 sm:ml-auto sm:gap-6">
+        <a
+          class="text-xs text-gray-700 underline-offset-4 hover:underline"
+          href="#"
+          >Termos de Serviço</a
+        >
+        <a
+          class="text-xs text-gray-700 underline-offset-4 hover:underline"
+          href="#"
+          >Privacidade</a
+        >
+      </nav>
+    </footer>
+
+    <script src="./menu.js"></script>
     <script>
       const formElement = document.getElementById('registro-form');
-     
+
       formElement.addEventListener('submit', function (e) {
         e.preventDefault();
         const data = new FormData(formElement);
-        const nome = data.get('senha')
+        const nome = data.get('senha');
         const email = data.get('senha');
         const password = data.get('email');
-        const telefone = data.get('telefone')      
+        const telefone = data.get('telefone');
         window.location.href = './home.html';
-      })
+      });
     </script>
-</body>
+  </body>
 </html>

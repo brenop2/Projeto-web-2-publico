@@ -41,16 +41,15 @@
 }
 .login-container button {
   width: 100%;
-  padding: 10px;
+  padding: 12px;
   background-color: #0f766e;
   color: white;
   border: none;
-  border-radius: 6px;
-  font-size: 14px;
-  font-weight: 600;
+  border-radius: 4.8px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-top: 20px;
+  font-size: 17px;
+  margin-top: 12px;
+  transition: all 0.2s;
 }
 .login-container button:hover {
   background-color: #115e59;
