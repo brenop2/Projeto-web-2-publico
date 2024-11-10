@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduQuiz - Cadastre-se </title> <!--Nome da pagina-->
+    <link rel="stylesheet" href="./registro.css"> <!--Aqui ele esta puxando o css-->
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+          font-family: 'Inter', sans-serif;
+        }
+        
+    </style>
+
+</head>
+<body>
+    <div class="container"> <!-- Classe container dentro da div pra fazer a estilização da pagina mais facil com o CSS-->
+        <h2>Cadastre-se para ter acesso ao EduQuiz</h2> <!--Titulo da caixa de cadastro-->
+          <form id="registro-form">
+            <input type="text" class="input-field" name="nome" placeholder="Nome Completo" required>
+            <input type="password" class="input-field" name="senha" placeholder="Senha" required>
+            <input type="email" class="input-field" name="email" placeholder="E-mail" required>
+            <input type="tel" class="input-field" name="telefone" placeholder="Telefone" required>
+            <button type="submit" class="btn">Registrar</button>
+          </form>
+        <p class="message">Se você já tem uma conta, clique <a href="./login.html">AQUI</a> para fazer login</p> <!--Aqui é o botão para caso o usuario ja tenha uma conta ele vai para o login-->
+      
+      </div>
+    <script>
+      const formElement = document.getElementById('registro-form');
+     
+      formElement.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const data = new FormData(formElement);
+        const nome = data.get('senha')
+        const email = data.get('senha');
+        const password = data.get('email');
+        const telefone = data.get('telefone')      
+        window.location.href = './home.html';
+      })
+    </script>
+</body>
+</html>
