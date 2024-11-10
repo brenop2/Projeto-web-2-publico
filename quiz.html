@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EduQuiz - Matemática</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+      body {
+        font-family: 'Inter', sans-serif;
+      }
+    </style>
+  </head>
+  <body class="flex min-h-screen flex-col bg-gray-100">
+    <header class="flex h-14 items-center bg-white px-4 shadow-md lg:px-6">
+      <div class="container mx-auto flex items-center justify-between">
+        <a href="index.html" class="flex items-center justify-center">
+          <i class="fas fa-graduation-cap mr-2 text-2xl text-teal-700"></i>
+          <span class="text-2xl font-bold text-teal-700">EduQuiz</span>
+        </a>
+        <nav class="hidden items-center gap-4 sm:gap-6 md:flex">
+          <a
+            class="text-sm font-medium text-gray-700 underline-offset-4 hover:underline"
+            href="./home.html"
+            >Home</a
+          >
+          <a
+            class="text-sm font-medium text-gray-700 underline-offset-4 hover:underline"
+            href="#"
+            >Progresso</a
+          >
+          <a
+            class="text-sm font-medium text-gray-700 underline-offset-4 hover:underline"
+            href="#"
+            >Configurações</a
+          >
+          <div class="relative">
+            <button
+              id="user-menu-button"
+              class="flex items-center gap-2 text-sm font-medium text-gray-700 hover:text-gray-800"
+            >
+              <span>Joana da Silva</span>
+              <img
+                class="h-8 w-8 rounded-full"
+                src="./assets/breno.png"
+                alt="User avatar"
+              />
+            </button>
+            <!-- Dropdown menu, show/hide based on menu state -->
+            <div
+              id="user-menu"
+              class="absolute right-0 mt-2 hidden w-48 rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5"
+            >
+              <a
+                href="#"
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                >Perfil</a
+              >
+              <a
+                href="#"
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                >Sair</a
+              >
+            </div>
+          </div>
+        </nav>
+        <button
+          id="mobile-menu-button"
+          class="md:hidden"
+          aria-label="Abrir menu móvel"
+        >
+          <i class="fas fa-bars text-gray-700"></i>
+        </button>
+      </div>
+    </header>
+
+    <div
+      id="mobile-menu"
+      class="fixed inset-0 z-50 hidden bg-gray-800 bg-opacity-75"
+    >
+      <div class="flex justify-end p-4">
+        <button
+          id="close-menu-button"
+          class="text-white"
+          aria-label="Fechar menu móvel"
+        >
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <nav>
+        <ul class="flex flex-col items-center space-y-4 text-lg text-white">
+          <li><a href="#" class="hover:text-gray-300">Meus Quizzes</a></li>
+          <li><a href="#" class="hover:text-gray-300">Progresso</a></li>
+          <li><a href="#" class="hover:text-gray-300">Configurações</a></li>
+          <li><a href="#" class="hover:text-gray-300">Perfil</a></li>
+          <li><a href="#" class="hover:text-gray-300">Sair</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <main
+      class="container mx-auto flex flex-grow flex-col items-center justify-center px-4 py-8"
+    >
+      <div class="mb-8">
+        <div
+          id="timer"
+          class="flex h-24 w-24 items-center justify-center rounded-full bg-teal-700 text-4xl font-bold text-white"
+        >
+          90
+        </div>
+      </div>
+      <div class="relative w-full max-w-2xl rounded-lg bg-white p-6 shadow-md">
+        <div class="mb-6 flex items-center justify-between">
+          <h1 class="text-2xl font-bold text-gray-900">Quiz</h1>
+          <div id="progress" class="text-lg font-semibold text-gray-600">
+            Pergunta 1 de 8
+          </div>
+        </div>
+        <h2 id="question" class="mb-4 text-xl font-semibold text-gray-800">
+          Carregando pergunta...
+        </h2>
+        <div id="options" class="space-y-4"></div>
+      </div>
+
+      <div
+        id="success-feedback"
+        class="w-full max-w-md rounded-lg bg-white p-8 text-center shadow-lg"
+        hidden
+      >
+        <div class="mb-6 text-6xl text-teal-600">
+          <i class="fas fa-check-circle"></i>
+        </div>
+        <h1 class="mb-2 text-3xl font-bold text-gray-800">Parabéns!</h1>
+        <p class="mb-8 text-gray-600">Você completou o quiz com sucesso!</p>
+        <div class="space-y-4">
+          <button
+            id="restart-button"
+            class="w-full rounded-lg bg-teal-600 px-4 py-2 font-semibold text-white transition duration-300 hover:bg-teal-700"
+          >
+            Jogar Novamente
+          </button>
+          <button
+            id="home-button"
+            class="w-full rounded-lg bg-gray-200 px-4 py-2 font-semibold text-gray-800 transition duration-300 hover:bg-gray-300"
+          >
+            Voltar para Home
+          </button>
+        </div>
+      </div>
+
+      <div
+        id="failure-feedback"
+        class="w-full max-w-md rounded-lg bg-white p-8 text-center shadow-lg"
+        hidden
+      >
+        <div class="mb-6 text-6xl text-red-600">
+          <i class="fas fa-times-circle"></i>
+        </div>
+        <h1 class="mb-2 text-3xl font-bold text-gray-800">
+          Não foi dessa vez!
+        </h1>
+        <p class="mb-8 text-gray-600">
+          Continue praticando para melhorar seus resultados.
+        </p>
+        <div class="space-y-4">
+          <button
+            id="retry-button"
+            class="w-full rounded-lg bg-teal-600 px-4 py-2 font-semibold text-white transition duration-300 hover:bg-teal-700"
+          >
+            Tentar Novamente
+          </button>
+          <button
+            id="home-button"
+            class="w-full rounded-lg bg-gray-200 px-4 py-2 font-semibold text-gray-800 transition duration-300 hover:bg-gray-300"
+          >
+            Voltar para Home
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <div class="container mx-auto mb-4 px-4">
+      <button
+        id="sound-toggle"
+        class="float-right rounded-full bg-teal-700 p-3 text-white shadow-lg transition-colors hover:bg-teal-800"
+      >
+        <i class="fas fa-volume-up"></i>
+      </button>
+    </div>
+
+    <footer
+      class="mx-auto flex w-full max-w-7xl shrink-0 flex-col items-center gap-2 border-t px-4 py-6 sm:flex-row md:px-6"
+    >
+      <p class="text-xs text-gray-700">
+        © 2024 EduQuiz Inc. Todos os direitos reservados.
+      </p>
+      <nav class="flex gap-4 sm:ml-auto sm:gap-6">
+        <a
+          class="text-xs text-gray-700 underline-offset-4 hover:underline"
+          href="#"
+          >Termos de Serviço</a
+        >
+        <a
+          class="text-xs text-gray-700 underline-offset-4 hover:underline"
+          href="#"
+          >Privacidade</a
+        >
+      </nav>
+    </footer>
+
+    <script>
+      const timerElement = document.getElementById('timer');
+      const questionElement = document.getElementById('question');
+      const optionsElement = document.getElementById('options');
+      const soundToggleButton = document.getElementById('sound-toggle');
+      const progressElement = document.getElementById('progress');
+
+      let timeLeft = 90;
+      let timerInterval;
+      let isSoundOn = true;
+      let currentQuestionIndex = 0;
+
+      // Sample question data (replace with your actual questions)
+      const questions = [
+        {
+          question: 'Qual é a capital do Brasil?',
+          options: ['São Paulo', 'Rio de Janeiro', 'Brasília', 'Salvador'],
+          correctAnswer: 2,
+        },
+        {
+          question: 'Quem pintou a Mona Lisa?',
+          options: [
+            'Vincent van Gogh',
+            'Leonardo da Vinci',
+            'Pablo Picasso',
+            'Michelangelo',
+          ],
+          correctAnswer: 1,
+        },
+        {
+          question: 'Qual é o maior planeta do sistema solar?',
+          options: ['Marte', 'Vênus', 'Saturno', 'Júpiter'],
+          correctAnswer: 3,
+        },
+        {
+          question: 'Qual é o símbolo químico do ouro?',
+          options: ['Au', 'Ag', 'Fe', 'Cu'],
+          correctAnswer: 0,
+        },
+        {
+          question: 'Em que ano começou a Primeira Guerra Mundial?',
+          options: ['1914', '1918', '1939', '1945'],
+          correctAnswer: 0,
+        },
+        {
+          question: 'Qual é o maior oceano do mundo?',
+          options: ['Atlântico', 'Índico', 'Ártico', 'Pacífico'],
+          correctAnswer: 3,
+        },
+        {
+          question: "Quem escreveu 'Dom Quixote'?",
+          options: [
+            'William Shakespeare',
+            'Miguel de Cervantes',
+            'Charles Dickens',
+            'Fyodor Dostoevsky',
+          ],
+          correctAnswer: 1,
+        },
+        {
+          question: 'Qual é o menor país do mundo?',
+          options: ['Mônaco', 'Vaticano', 'San Marino', 'Liechtenstein'],
+          correctAnswer: 1,
+        },
+      ];
+
+      function startTimer() {
+        clearInterval(timerInterval); // Ensure any previous interval is cleared
+        timerInterval = setInterval(() => {
+          timeLeft--;
+          timerElement.textContent = timeLeft;
+          if (timeLeft <= 0) {
+            clearInterval(timerInterval);
+            goToNextQuestion();
+          }
+        }, 1000);
+      }
+
+      function resetTimer() {
+        timeLeft = 90;
+        timerElement.textContent = timeLeft;
+        startTimer();
+      }
+
+      function loadQuestion() {
+        const question = questions[currentQuestionIndex];
+        questionElement.textContent = question.question;
+        optionsElement.innerHTML = '';
+        progressElement.textContent = `Pergunta ${currentQuestionIndex + 1} de ${questions.length}`;
+
+        question.options.forEach((option, index) => {
+          const button = document.createElement('button');
+          button.textContent = option;
+          button.className =
+            'w-full text-left p-4 bg-gray-100 hover:bg-gray-200 rounded-md transition-colors disabled:pointer-events-none';
+          button.onclick = () => selectAnswer(index);
+          optionsElement.appendChild(button);
+        });
+
+        resetTimer(); // Start the timer for the new question
+      }
+
+      function selectAnswer(index) {
+        clearInterval(timerInterval); // Stop the timer as soon as an answer is selected
+
+        const question = questions[currentQuestionIndex];
+        const buttons = optionsElement.getElementsByTagName('button');
+
+        // Disable all buttons
+        for (let i = 0; i < buttons.length; i++) {
+          const button = buttons[i];
+          button.disabled = true;
+        }
+
+        // Highlight correct and selected answers
+        buttons[question.correctAnswer].classList.add(
+          'bg-green-600',
+          'text-white',
+        );
+        if (index !== question.correctAnswer) {
+          buttons[index].classList.add('bg-red-600', 'text-white');
+        }
+
+        // Move to the next question after a delay
+        setTimeout(() => {
+          goToNextQuestion();
+        }, 2000);
+      }
+
+      function goToNextQuestion() {
+        currentQuestionIndex++;
+        if (currentQuestionIndex < questions.length) {
+          loadQuestion();
+        } else {
+          //alert('Quiz concluído!'); // End of the quiz
+        }
+      }
+
+      function toggleSound() {
+        isSoundOn = !isSoundOn;
+        soundToggleButton.innerHTML = isSoundOn
+          ? '<i class="fas fa-volume-up"></i>'
+          : '<i class="fas fa-volume-mute"></i>';
+      }
+
+      soundToggleButton.addEventListener('click', toggleSound);
+
+      // Initialize the quiz
+      loadQuestion();
+    </script>
+  </body>
+</html>
