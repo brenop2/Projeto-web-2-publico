@@ -4,12 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>EduQuiz - Login</title>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+      body {
+        font-family: 'Inter', sans-serif;
+      }
+    </style>
     <link
-    rel="stylesheet" href="./login.css"
+      rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-      
     />
-    
+    <link rel="stylesheet" href="./login.css" />
   </head>
   <body>
     <div class="login-container">
@@ -34,6 +39,11 @@
           />
         </div>
         <button type="submit">Entrar</button>
+        <p class="message">
+          Não tem conta ainda?<a href="./registro.html">
+            Cria sua conta agora!</a
+          >
+        </p>
       </form>
       <p id="error-message"></p>
     </div>

@@ -1,0 +1,599 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EduQuiz - Matemática</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+      body {
+        font-family: 'Inter', sans-serif;
+      }
+    </style>
+  </head>
+  <body class="flex min-h-screen flex-col bg-gray-100">
+    <header class="flex h-14 items-center bg-white px-4 shadow-md lg:px-6">
+      <div class="container mx-auto flex items-center justify-between">
+        <a href="index.html" class="flex items-center justify-center">
+          <i class="fas fa-graduation-cap mr-2 text-2xl text-teal-700"></i>
+          <span class="text-2xl font-bold text-teal-700">EduQuiz</span>
+        </a>
+        <nav class="hidden items-center gap-4 sm:gap-6 md:flex">
+          <a
+            class="text-sm font-medium text-gray-700 underline-offset-4 hover:underline"
+            href="./home.html"
+            >Home</a
+          >
+          <a
+            class="text-sm font-medium text-gray-700 underline-offset-4 hover:underline"
+            href="#"
+            >Progresso</a
+          >
+          <a
+            class="text-sm font-medium text-gray-700 underline-offset-4 hover:underline"
+            href="#"
+            >Configurações</a
+          >
+          <div class="relative">
+            <button
+              id="user-menu-button"
+              class="flex items-center gap-2 text-sm font-medium text-gray-700 hover:text-gray-800"
+            >
+              <span>Joana da Silva</span>
+              <img
+                class="h-8 w-8 rounded-full"
+                src="./assets/breno.png"
+                alt="User avatar"
+              />
+            </button>
+            <!-- Dropdown menu, show/hide based on menu state -->
+            <div
+              id="user-menu"
+              class="absolute right-0 mt-2 hidden w-48 rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5"
+            >
+              <a
+                href="#"
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                >Perfil</a
+              >
+              <a
+                href="#"
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                >Sair</a
+              >
+            </div>
+          </div>
+        </nav>
+        <button
+          id="mobile-menu-button"
+          class="md:hidden"
+          aria-label="Abrir menu móvel"
+        >
+          <i class="fas fa-bars text-gray-700"></i>
+        </button>
+      </div>
+    </header>
+
+    <div
+      id="mobile-menu"
+      class="fixed inset-0 z-50 hidden bg-gray-800 bg-opacity-75"
+    >
+      <div class="flex justify-end p-4">
+        <button
+          id="close-menu-button"
+          class="text-white"
+          aria-label="Fechar menu móvel"
+        >
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <nav>
+        <ul class="flex flex-col items-center space-y-4 text-lg text-white">
+          <li><a href="#" class="hover:text-gray-300">Meus Quizzes</a></li>
+          <li><a href="#" class="hover:text-gray-300">Progresso</a></li>
+          <li><a href="#" class="hover:text-gray-300">Configurações</a></li>
+          <li><a href="#" class="hover:text-gray-300">Perfil</a></li>
+          <li><a href="#" class="hover:text-gray-300">Sair</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <main
+      class="container mx-auto flex flex-grow flex-col items-center justify-center px-4 py-8"
+    >
+      <section id="game" class="flex flex-col items-center justify-center">
+        <div class="mb-8">
+          <div
+            id="timer"
+            class="flex h-24 w-24 items-center justify-center rounded-full bg-teal-700 text-4xl font-bold text-white"
+          >
+            90
+          </div>
+        </div>
+        <div
+          class="min-w-xl relative w-full max-w-2xl rounded-lg bg-white p-6 shadow-md"
+        >
+          <div class="mb-6 flex items-center justify-between">
+            <h1 class="text-2xl font-bold text-gray-900">Quiz</h1>
+            <div id="progress" class="text-lg font-semibold text-gray-600">
+              Pergunta 1 de 8
+            </div>
+          </div>
+          <h2 id="question" class="mb-4 text-xl font-semibold text-gray-800">
+            Carregando pergunta...
+          </h2>
+          <div id="options" class="space-y-4"></div>
+        </div>
+        <div
+          id="explanation-container"
+          class="mt-4 hidden w-full rounded-lg bg-white p-6 text-gray-700 shadow-md"
+        >
+          <strong class="text-xl font-semibold text-gray-800"
+            >Explicação:
+          </strong>
+          <p id="explanation"></p>
+        </div>
+      </section>
+
+      <form
+        id="success-feedback"
+        class="w-full max-w-md rounded-lg bg-white p-8 text-center shadow-lg"
+        hidden
+      >
+        <div class="mb-6 text-6xl text-teal-600">
+          <i class="fas fa-check-circle"></i>
+        </div>
+        <h1 class="mb-2 text-3xl font-bold text-gray-800">Parabéns!</h1>
+        <p class="mb-8 text-gray-600">Você completou o quiz com sucesso!</p>
+        <div class="space-y-4">
+          <button
+            type="reset"
+            class="w-full rounded-lg bg-teal-600 p-4 font-semibold text-white transition duration-300 hover:bg-teal-700"
+          >
+            Jogar Novamente
+          </button>
+          <button
+            type="submit"
+            class="w-full rounded-lg bg-gray-200 p-4 font-semibold text-gray-800 transition duration-300 hover:bg-gray-300"
+          >
+            Voltar para Home
+          </button>
+        </div>
+      </form>
+
+      <form
+        id="failure-feedback"
+        class="w-full max-w-md rounded-lg bg-white p-8 text-center shadow-lg"
+        hidden
+      >
+        <div class="mb-6 text-6xl text-red-600">
+          <i class="fas fa-times-circle"></i>
+        </div>
+        <h1 class="mb-2 text-3xl font-bold text-gray-800">
+          Não foi dessa vez!
+        </h1>
+        <p class="mb-8 text-gray-600">
+          Continue praticando para melhorar seus resultados.
+        </p>
+        <div class="space-y-4">
+          <button
+            type="reset"
+            class="w-full rounded-lg bg-teal-600 p-4 font-semibold text-white transition duration-300 hover:bg-teal-700"
+          >
+            Tentar Novamente
+          </button>
+          <button
+            type="submit"
+            class="w-full rounded-lg bg-gray-200 p-4 font-semibold text-gray-800 transition duration-300 hover:bg-gray-300"
+          >
+            Voltar para Home
+          </button>
+        </div>
+      </form>
+    </main>
+
+    <div class="container mx-auto mb-4 px-4">
+      <button
+        id="sound-toggle"
+        class="float-right rounded-full bg-teal-700 p-3 text-white shadow-lg transition-colors hover:bg-teal-800"
+      >
+        <i class="fas fa-volume-up"></i>
+      </button>
+    </div>
+
+    <footer
+      class="mx-auto flex w-full max-w-7xl shrink-0 flex-col items-center gap-2 border-t px-4 py-6 sm:flex-row md:px-6"
+    >
+      <p class="text-xs text-gray-700">
+        © 2024 EduQuiz Inc. Todos os direitos reservados.
+      </p>
+      <nav class="flex gap-4 sm:ml-auto sm:gap-6">
+        <a
+          class="text-xs text-gray-700 underline-offset-4 hover:underline"
+          href="#"
+          >Termos de Serviço</a
+        >
+        <a
+          class="text-xs text-gray-700 underline-offset-4 hover:underline"
+          href="#"
+          >Privacidade</a
+        >
+      </nav>
+    </footer>
+
+    <script>
+      const gameElement = document.getElementById('game');
+      const timerElement = document.getElementById('timer');
+      const questionElement = document.getElementById('question');
+      const optionsElement = document.getElementById('options');
+      const explanationContainerElement = document.getElementById(
+        'explanation-container',
+      );
+      const explanationElement = document.getElementById('explanation');
+      const soundToggleButton = document.getElementById('sound-toggle');
+      const progressElement = document.getElementById('progress');
+      const successFeedbackElement =
+        document.getElementById('success-feedback');
+      const failureFeedbackElement =
+        document.getElementById('failure-feedback');
+
+      const TIMER_IN_SECONDS = 90;
+      let timeLeft = TIMER_IN_SECONDS;
+      let timerInterval;
+      let isSoundOn = true;
+      let currentQuestionIndex = 0;
+      let correctAnswers = 0;
+
+      const allQuestions = [
+        {
+          question:
+            'A cidade brasileira que apresenta o maior número de habitantes é:',
+          options: ['São Paulo.', 'Amazonas.', 'Maranhão.', 'Tocantins.'],
+          correctAnswer: 0,
+          explanation: 'São Paulo é a cidade mais populosa do Brasil.',
+        },
+        {
+          question:
+            'A cidade do Rio de Janeiro recebe todos os anos milhares de pessoas de diversas partes do país e do mundo. O estado atrai muitos visitantes por sua beleza natural, eventos como o carnaval, e sua importância histórica. Em que classificação se encaixa a cidade do Rio de Janeiro?',
+          options: [
+            'Cidade turística.',
+            'Cidade comercial.',
+            'Cidade industrial.',
+            'Cidade religiosa.',
+          ],
+          correctAnswer: 0,
+          explanation:
+            'Porque o Rio de Janeiro atrai muitos turistas por suas belezas naturais e eventos como o carnaval.',
+        },
+        {
+          question:
+            'O _______________ é um dos principais problemas ambientais no Brasil que acontece desde a chegada dos portugueses em 1500. Das alternativas abaixo, a que preenche corretamente o espaço é:',
+          options: [
+            'Efeito estufa.',
+            'Desmatamento.',
+            'Poluição.',
+            'Assoreamento.',
+          ],
+          correctAnswer: 1,
+          explanation:
+            'O desmatamento é o corte de árvores e a destruição de florestas, um problema que ocorre no Brasil desde 1500.',
+        },
+        {
+          question:
+            'Em 19 de agosto de 2019, moradores de São Paulo ficaram assustados com o final da tarde que escureceu grande parte da cidade. Esse fenômeno foi resultado das queimadas que aconteceram na região amazônica. Sobre as queimadas, é incorreto afirmar:',
+          options: [
+            'Uma das consequências das queimadas é a mudança da temperatura e umidade do solo.',
+            'As queimadas somente acontecem de maneira intencional, ou seja, por pessoas que provocam os incêndios.',
+            'As queimadas intensificam o efeito estufa e o aquecimento global.',
+            'As queimadas trazem alguns benefícios tais como a limpeza e a fertilização do solo.',
+          ],
+          correctAnswer: 1,
+          explanation:
+            'Nem todas as queimadas são provocadas por pessoas; algumas acontecem naturalmente, como por raios.',
+        },
+        {
+          question: 'O maior país da América do Sul em território é:',
+          options: ['Argentina.', 'Brasil.', 'Colômbia.', 'Chile.'],
+          correctAnswer: 1,
+          explanation: 'O Brasil é o maior país da América do Sul em tamanho.',
+        },
+        {
+          question: 'O Rio Amazonas é famoso por ser:',
+          options: [
+            'O rio mais poluído do mundo.',
+            'O rio mais curto do mundo.',
+            'O rio com maior volume de água do mundo.',
+            'O rio mais profundo do mundo.',
+          ],
+          correctAnswer: 2,
+          explanation:
+            'O Rio Amazonas tem o maior volume de água de todos os rios do mundo.',
+        },
+        {
+          question: 'A capital do Brasil é:',
+          options: ['Rio de Janeiro.', 'São Paulo.', 'Brasília.', 'Salvador.'],
+          correctAnswer: 2,
+          explanation: 'Brasília é a capital do Brasil desde 1960.',
+        },
+        {
+          question: 'O Pantanal é conhecido por ser:',
+          options: [
+            'Um grande deserto.',
+            'A maior planície alagável do mundo.',
+            'Uma grande cordilheira.',
+            'Uma região de tundra.',
+          ],
+          correctAnswer: 1,
+          explanation: 'O Pantanal é a maior área alagada contínua do planeta.',
+        },
+        {
+          question: 'O que separa o continente africano do europeu é o:',
+          options: [
+            'Rio Nilo.',
+            'Mar Mediterrâneo.',
+            'Oceano Atlântico.',
+            'Oceano Índico.',
+          ],
+          correctAnswer: 1,
+          explanation: 'O Mar Mediterrâneo fica entre a África e a Europa.',
+        },
+        {
+          question:
+            'A Mata Atlântica é um tipo de floresta encontrada principalmente em:',
+          options: [
+            'Regiões costeiras do Brasil.',
+            'Regiões desérticas do Brasil.',
+            'Regiões geladas do Brasil.',
+            'Regiões montanhosas da Europa.',
+          ],
+          correctAnswer: 0,
+          explanation:
+            'A Mata Atlântica é uma floresta que fica perto do litoral brasileiro.',
+        },
+        {
+          question: 'O ponto mais alto do Brasil é:',
+          options: [
+            'Pico da Neblina.',
+            'Monte Everest.',
+            'Pico das Agulhas Negras.',
+            'Morro do Pão de Açúcar.',
+          ],
+          correctAnswer: 0,
+          explanation: 'O Pico da Neblina é a montanha mais alta do Brasil.',
+        },
+        {
+          question:
+            'O principal bioma que predomina na região Norte do Brasil é:',
+          options: ['Cerrado.', 'Mata Atlântica.', 'Amazônia.', 'Caatinga.'],
+          correctAnswer: 2,
+          explanation: 'A Amazônia é a floresta que predomina na região Norte.',
+        },
+        {
+          question: 'Qual é o oceano que banha a costa leste do Brasil?',
+          options: [
+            'Oceano Pacífico.',
+            'Oceano Atlântico.',
+            'Oceano Índico.',
+            'Oceano Ártico.',
+          ],
+          correctAnswer: 1,
+          explanation: 'O Oceano Atlântico fica a leste do Brasil.',
+        },
+        {
+          question: 'As estações do ano ocorrem devido:',
+          options: [
+            'À forma plana da Terra.',
+            'Ao movimento de rotação da Terra.',
+            'À inclinação do eixo da Terra e sua translação ao redor do Sol.',
+            'À distância fixa entre a Terra e o Sol.',
+          ],
+          correctAnswer: 2,
+          explanation:
+            'A inclinação do eixo da Terra e sua volta ao redor do Sol causam as estações.',
+        },
+        {
+          question: 'Qual destes países não faz fronteira com o Brasil?',
+          options: ['Uruguai.', 'Paraguai.', 'Chile.', 'Peru.'],
+          correctAnswer: 2,
+          explanation:
+            'O Chile não faz fronteira com o Brasil; fica do outro lado da Cordilheira dos Andes.',
+        },
+        {
+          question:
+            'A linha imaginária que divide a Terra em hemisfério norte e sul é chamada de:',
+          options: [
+            'Meridiano de Greenwich.',
+            'Trópico de Câncer.',
+            'Linha do Equador.',
+            'Trópico de Capricórnio.',
+          ],
+          correctAnswer: 2,
+          explanation: 'A Linha do Equador divide a Terra em norte e sul.',
+        },
+        {
+          question: 'O que é uma ilha?',
+          options: [
+            'Um pedaço de terra cercado de água por todos os lados.',
+            'Uma montanha muito alta.',
+            'Um rio que deságua no mar.',
+            'Uma região desértica sem vida.',
+          ],
+          correctAnswer: 0,
+          explanation: 'Uma ilha é terra rodeada de água por todos os lados.',
+        },
+        {
+          question: 'A maior floresta tropical do mundo é:',
+          options: [
+            'Floresta Amazônica.',
+            'Floresta Negra.',
+            'Floresta de Sherwood.',
+            'Floresta da Tijuca.',
+          ],
+          correctAnswer: 0,
+          explanation:
+            'A Floresta Amazônica é a maior floresta tropical do mundo.',
+        },
+        {
+          question: 'Qual é a capital da França?',
+          options: ['Londres.', 'Paris.', 'Roma.', 'Berlim.'],
+          correctAnswer: 1,
+          explanation: 'Paris é a capital da França.',
+        },
+        {
+          question: 'O deserto mais seco do mundo é:',
+          options: [
+            'Deserto do Saara.',
+            'Deserto de Gobi.',
+            'Deserto da Antártica.',
+            'Deserto do Atacama.',
+          ],
+          correctAnswer: 3,
+          explanation:
+            'O Deserto do Atacama, no Chile, é o mais seco do mundo.',
+        },
+        {
+          question: 'Qual fenômeno natural é responsável por tremer a terra?',
+          options: ['Furacão.', 'Tsunami.', 'Terremoto.', 'Eclipse.'],
+          correctAnswer: 2,
+          explanation:
+            'Um terremoto é quando o chão treme devido ao movimento das placas tectônicas.',
+        },
+      ];
+      const questions = [...allQuestions]
+        .sort(() => Math.random() - 0.5)
+        .slice(0, 8);
+
+      function startTimer() {
+        clearInterval(timerInterval); // Ensure any previous interval is cleared
+        timerInterval = setInterval(() => {
+          timeLeft--;
+          timerElement.textContent = timeLeft;
+          if (timeLeft <= 0) {
+            clearInterval(timerInterval);
+            goToNextQuestion();
+          }
+        }, 1000);
+      }
+
+      function resetTimer() {
+        timeLeft = TIMER_IN_SECONDS;
+        timerElement.textContent = timeLeft;
+        startTimer();
+      }
+
+      function loadQuestion() {
+        const question = questions[currentQuestionIndex];
+        questionElement.textContent = question.question;
+        optionsElement.innerHTML = '';
+        progressElement.textContent = `Pergunta ${currentQuestionIndex + 1} de ${questions.length}`;
+        explanationContainerElement.classList.add('hidden');
+        explanationElement.textContent = '';
+
+        question.options.forEach((option, index) => {
+          const button = document.createElement('button');
+          button.textContent = option;
+          button.className =
+            'w-full text-left p-4 bg-gray-100 hover:bg-gray-200 rounded-md transition-colors disabled:pointer-events-none';
+          button.onclick = () => selectAnswer(index);
+          optionsElement.appendChild(button);
+        });
+
+        resetTimer(); // Start the timer for the new question
+      }
+
+      function selectAnswer(index) {
+        // Stop the timer as soon as an answer is selected
+        clearInterval(timerInterval);
+
+        const question = questions[currentQuestionIndex];
+        const buttons = optionsElement.getElementsByTagName('button');
+
+        // Disable all buttons
+        for (let i = 0; i < buttons.length; i++) {
+          const button = buttons[i];
+          button.disabled = true;
+        }
+
+        // Highlight correct and selected answers
+        buttons[question.correctAnswer].classList.add(
+          'bg-green-600',
+          'text-white',
+        );
+        if (index !== question.correctAnswer) {
+          buttons[index].classList.add('bg-red-600', 'text-white');
+        } else {
+          correctAnswers++;
+        }
+
+        // Show explanation
+        explanationElement.textContent = question.explanation;
+        explanationContainerElement.classList.remove('hidden');
+
+        // Move to the next question after a delay
+        setTimeout(() => {
+          goToNextQuestion();
+        }, 3000);
+      }
+
+      function goToNextQuestion() {
+        currentQuestionIndex++;
+        if (currentQuestionIndex < questions.length) {
+          loadQuestion();
+        } else {
+          showFeedback();
+        }
+      }
+
+      function showFeedback() {
+        const scorePercentage = (correctAnswers / questions.length) * 100;
+        if (scorePercentage >= 70) {
+          successFeedbackElement.hidden = false;
+        } else {
+          failureFeedbackElement.hidden = false;
+        }
+
+        gameElement.hidden = true;
+        gameElement.classList.add('hidden');
+
+        successFeedbackElement.addEventListener('submit', function (e) {
+          e.preventDefault();
+          window.location.href = 'home.html';
+        });
+        successFeedbackElement.addEventListener('reset', function (e) {
+          e.preventDefault();
+          window.location.reload();
+        });
+
+        failureFeedbackElement.addEventListener('submit', function (e) {
+          e.preventDefault();
+          window.location.href = 'home.html';
+        });
+        failureFeedbackElement.addEventListener('reset', function (e) {
+          e.preventDefault();
+          window.location.reload();
+        });
+      }
+
+      function toggleSound() {
+        isSoundOn = !isSoundOn;
+        soundToggleButton.innerHTML = isSoundOn
+          ? '<i class="fas fa-volume-up"></i>'
+          : '<i class="fas fa-volume-mute"></i>';
+      }
+
+      soundToggleButton.addEventListener('click', toggleSound);
+
+      // Initialize the quiz
+      loadQuestion();
+    </script>
+  </body>
+</html>
